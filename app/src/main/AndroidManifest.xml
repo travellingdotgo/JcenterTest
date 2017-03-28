@@ -15,6 +15,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+        <receiver android:name=".receiver.StatusReceiver">
+            <intent-filter>
+                <action android:name="com.bewant2be.ntf.NETWORK_STATUS_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name="com.bewant2be.doit.utilslib.service.NetworkMonitorIntentService"
+            android:exported="false" />
     </application>
 
 </manifest>

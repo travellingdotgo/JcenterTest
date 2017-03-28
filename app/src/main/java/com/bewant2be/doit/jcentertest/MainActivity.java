@@ -1,5 +1,6 @@
 package com.bewant2be.doit.jcentertest;
 
+import android.content.Intent;
 import android.hardware.Camera;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.bewant2be.doit.utilslib.CameraRecord;
+import com.bewant2be.doit.utilslib.service.NetworkMonitorIntentService;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -36,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Intent intent = new Intent(MainActivity.this, NetworkMonitorIntentService.class);
+        startService(intent);
 
 
         surfaceView1 = (SurfaceView)findViewById(R.id.surfaceview1);
