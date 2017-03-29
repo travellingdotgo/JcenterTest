@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply from: 'version.gradle'
 
 android {
     compileSdkVersion 23
@@ -8,8 +9,8 @@ android {
         applicationId "com.bewant2be.doit.jcentertest"
         minSdkVersion 19
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        versionCode gitVersionCode()
+        versionName gitVersionTag()
     }
     buildTypes {
         release {
