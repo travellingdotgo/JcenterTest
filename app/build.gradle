@@ -10,7 +10,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 23
         versionCode gitVersionCode()
-        versionName gitVersionTag()
+        versionName gitFullVersionTag()
     }
     buildTypes {
         release {

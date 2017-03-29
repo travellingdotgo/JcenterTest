@@ -23,7 +23,16 @@ def gitVersionTag() {
     return version
 }
 
+
+def gitFullVersionTag() {
+    def cmd = 'git describe --tags'
+    def version = cmd.execute().text.trim()
+
+    return version
+}
+
 ext{
     gitVersionCode = this.&gitVersionCode
     gitVersionTag = this.&gitVersionTag
+    gitFullVersionTag = this.&gitFullVersionTag
 }
