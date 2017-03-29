@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bewant2be.doit.utilslib.CameraRecord;
+import com.bewant2be.doit.utilslib.DiagnoseUtil;
 import com.bewant2be.doit.utilslib.ToastUtil;
 import com.bewant2be.doit.utilslib.service.NetworkMonitorIntentService;
 
@@ -22,6 +23,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
+    private final static String TAG = "MainActivity";
 
     SurfaceView surfaceView1;
     CameraRecord cameraRecord1;
@@ -74,7 +76,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onPostResume() {
         super.onPostResume();
 
-        testToast();
+        new DiagnoseUtil().checkMainThreadBlock(
+                new DiagnoseUtil.Callback() {
+                    @Override
+                    public void onResult(boolean b) {
+                        if (b) {
+                            Log.i(TAG, "MainThread working fine");
+                        } else {
+                            Log.i(TAG, "MainThread working not fine");
+                        }
+                    }
+                }
+        );
     }
 
     private void testToast(){
