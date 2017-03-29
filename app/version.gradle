@@ -31,8 +31,15 @@ def gitFullVersionTag() {
     return version
 }
 
+def timeStamp() {
+    def date = new Date()
+    def formattedDate = date.format('yyyyMMddHHmmss')
+    return formattedDate
+}
+
 ext{
     gitVersionCode = this.&gitVersionCode
     gitVersionTag = this.&gitVersionTag
     gitFullVersionTag = this.&gitFullVersionTag
+    timeStamp = this.&timeStamp
 }
