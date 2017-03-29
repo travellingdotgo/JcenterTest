@@ -2,13 +2,18 @@ package com.bewant2be.doit.jcentertest;
 
 import android.content.Intent;
 import android.hardware.Camera;
+import android.os.Looper;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.bewant2be.doit.utilslib.CameraRecord;
+import com.bewant2be.doit.utilslib.ToastUtil;
 import com.bewant2be.doit.utilslib.service.NetworkMonitorIntentService;
 
 import java.text.SimpleDateFormat;
@@ -63,5 +68,27 @@ public class MainActivity extends AppCompatActivity {
         params.width=Config.width/2;
         params.height=Config.height/2;
         view.setLayoutParams(params);
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+
+        testToast();
+    }
+
+    private void testToast(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int i = 0;
+
+                while( true ){
+                    i++;
+                    SystemClock.sleep( 1*1000 );
+                    ToastUtil.toastComptible(getApplicationContext(), "a toast msg from bg i=" + i );
+                }
+            }
+        }).start();
     }
 }
