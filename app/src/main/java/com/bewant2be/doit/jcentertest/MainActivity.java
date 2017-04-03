@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -45,15 +47,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initUi();
 
         Intent intent = new Intent(MainActivity.this, NetworkMonitorIntentService.class);
         startService(intent);
 
-
         surfaceView1 = (SurfaceView)findViewById(R.id.surfaceview1);
         cameraRecord1 = new CameraRecord(surfaceView1);
         initViewSize(surfaceView1);
-
 
         try{
             cameraRecord1.openCamera(CameraRecord.BACK_CAMERA, Config.width,Config.height, previewCallback0);
@@ -103,5 +104,31 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }).start();
+    }
+
+    public void initUi(){
+        Button btnWeb = (Button)findViewById(R.id.btnWeb);
+        btnWeb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+
+                Intent intent = new Intent(MainActivity.this, WebActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        Button btnWebjs = (Button)findViewById(R.id.btnWebjs);
+        btnWebjs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+
+                Intent intent = new Intent(MainActivity.this, WebjsActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }

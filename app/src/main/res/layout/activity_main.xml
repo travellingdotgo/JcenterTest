@@ -4,9 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
         <SurfaceView
@@ -17,6 +16,17 @@
             android:id="@+id/tv_meg"
             android:layout_width="3dp"
             android:layout_height="3dp" />
+
+        <Button
+            android:id="@+id/btnWeb"
+            android:text="btnWeb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/btnWebjs"
+            android:text="btnWebjs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 </RelativeLayout>
