@@ -1,11 +1,15 @@
 package com.bewant2be.doit.jcentertest;
 
+import android.annotation.TargetApi;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.webkit.CookieManager;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
@@ -20,6 +24,18 @@ public class WebActivity extends AppCompatActivity {
     private long exitTime = 0;
 
     WebViewClient webViewClient = new WebViewClient(){
+
+        @Override
+        @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+        public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
+            String debug = request.getMethod().toString()+"  " + request.getUrl().getAuthority().toString();
+
+            ToastUtil.toastComptible(getApplicationContext(), debug );
+            Log.i(TAG, debug );
+
+            return super.shouldInterceptRequest(view, request);
+        }
+
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
@@ -29,7 +45,7 @@ public class WebActivity extends AppCompatActivity {
             Log.e( TAG, "Cookies = " + CookieStr);
             super.onPageFinished(view, url);
 
-            ToastUtil.toastComptible(getApplicationContext(), "onPageFinished");
+            ToastUtil.toastComptible(getApplicationContext(), CookieStr);
         }
     };
 

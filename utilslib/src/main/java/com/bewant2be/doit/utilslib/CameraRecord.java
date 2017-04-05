@@ -21,6 +21,8 @@ public class CameraRecord implements SurfaceHolder.Callback {
     private int id=0;
     private int prevWidth,prevHeight;
 
+    private boolean debug = false;
+
     private SurfaceHolder holder;
     private Camera camera;
     private Camera.PreviewCallback previewCallback;
@@ -35,18 +37,17 @@ public class CameraRecord implements SurfaceHolder.Callback {
     }
 
     private void initPara( Camera camera ){
-
-        boolean debug = true;
         Camera.Parameters parameters = camera.getParameters();
         if (debug){
             List<Camera.Size> lists = parameters.getSupportedPictureSizes();
             for (Camera.Size size: lists){
-                Log.d(TAG, "size: " + size.width + "*" + size.height);
+                Log.v(TAG, "size: " + size.width + "*" + size.height);
             }
         }
 
         parameters.setPreviewSize(prevWidth, prevHeight);
         camera.setParameters(parameters);
+        //camera.setDisplayOrientation(90);
     }
 
 
@@ -66,7 +67,7 @@ public class CameraRecord implements SurfaceHolder.Callback {
             Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
             Camera.getCameraInfo(id, cameraInfo);
             Log.i(TAG, "camera: " + cameraInfo.facing + " " + cameraInfo.orientation  );
-            camera.setDisplayOrientation(0);// 0.rk 1.nexus
+            camera.setDisplayOrientation(0);// 0.rk  90.nexus 6P
             initPara(camera);
         }
 
@@ -136,6 +137,6 @@ public class CameraRecord implements SurfaceHolder.Callback {
     public void surfaceDestroyed(SurfaceHolder holder) {
         Log.e("CameraRecord", "surfaceDestroyed");
         stop();
-        release();
+    //    release();
     }
 }

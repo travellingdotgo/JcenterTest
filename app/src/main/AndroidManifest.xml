@@ -16,6 +16,22 @@
             </intent-filter>
         </activity>
 
+
+        <activity
+            android:name=".CameraActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity
+            android:name=".WebActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity android:name=".WebjsActivity">
+        </activity>
+
+
+
         <receiver android:name=".receiver.StatusReceiver">
             <intent-filter>
                 <action android:name="com.bewant2be.ntf.NETWORK_STATUS_CHANGE" />
@@ -25,11 +41,6 @@
         <service
             android:name="com.bewant2be.doit.utilslib.service.NetworkMonitorIntentService"
             android:exported="false" />
-
-        <activity
-            android:name=".WebActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".WebjsActivity"></activity>
     </application>
 
 </manifest>

@@ -27,22 +27,6 @@ public class MainActivity extends AppCompatActivity {
 
     private final static String TAG = "MainActivity";
 
-    SurfaceView surfaceView1;
-    CameraRecord cameraRecord1;
-
-
-    Camera.PreviewCallback previewCallback0 = new Camera.PreviewCallback(){
-        @Override
-        public void onPreviewFrame(byte[] data, Camera camera) {
-            //       Log.d(TAG, "previewCallback0 onPreviewFrame " );
-
-            Camera.Size size = camera.getParameters().getPreviewSize();
-            int format = camera.getParameters().getPreviewFormat();
-
-            camera.addCallbackBuffer(data);
-        }
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,26 +35,6 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(MainActivity.this, NetworkMonitorIntentService.class);
         startService(intent);
-
-        surfaceView1 = (SurfaceView)findViewById(R.id.surfaceview1);
-        cameraRecord1 = new CameraRecord(surfaceView1);
-        initViewSize(surfaceView1);
-
-        try{
-            cameraRecord1.openCamera(CameraRecord.BACK_CAMERA, Config.width,Config.height, previewCallback0);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-
-
-    private void initViewSize( final View view ){
-        LinearLayout.LayoutParams params =  (LinearLayout.LayoutParams)view.getLayoutParams();
-        params.width=Config.width/2;
-        params.height=Config.height/2;
-        view.setLayoutParams(params);
     }
 
     @Override
@@ -107,6 +71,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void initUi(){
+        Button btnCamera = (Button)findViewById(R.id.btnCamera);
+        btnCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+
+                Intent intent = new Intent(MainActivity.this, CameraActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
         Button btnWeb = (Button)findViewById(R.id.btnWeb);
         btnWeb.setOnClickListener(new View.OnClickListener() {
             @Override

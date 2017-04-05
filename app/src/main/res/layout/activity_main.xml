@@ -8,23 +8,29 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
-        <SurfaceView
-            android:id="@+id/surfaceview1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
         <TextView
             android:id="@+id/tv_meg"
-            android:layout_width="3dp"
-            android:layout_height="3dp" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btnCamera"
+            android:text="btnCamera"
+            android:textAllCaps="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/btnWeb"
             android:text="btnWeb"
+            android:textAllCaps="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
         <Button
             android:id="@+id/btnWebjs"
             android:text="btnWebjs"
+            android:textAllCaps="false"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
