@@ -21,7 +21,7 @@ public class CameraRecord implements SurfaceHolder.Callback {
     private int id=0;
     private int prevWidth,prevHeight;
 
-    private boolean debug = false;
+    private boolean debug = BuildConfig.DEBUG;
 
     private SurfaceHolder holder;
     private Camera camera;
@@ -29,7 +29,6 @@ public class CameraRecord implements SurfaceHolder.Callback {
 
     public CameraRecord(SurfaceView surface) {
         holder = surface.getHolder();
-        //holder.setFixedSize(300, 300);
         holder.addCallback(this);
         holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
@@ -47,7 +46,6 @@ public class CameraRecord implements SurfaceHolder.Callback {
 
         parameters.setPreviewSize(prevWidth, prevHeight);
         camera.setParameters(parameters);
-        //camera.setDisplayOrientation(90);
     }
 
 
@@ -67,7 +65,11 @@ public class CameraRecord implements SurfaceHolder.Callback {
             Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
             Camera.getCameraInfo(id, cameraInfo);
             Log.i(TAG, "camera: " + cameraInfo.facing + " " + cameraInfo.orientation  );
-            camera.setDisplayOrientation(0);// 0.rk  90.nexus 6P
+            camera.setDisplayOrientation(90);
+            // 0.       rk
+            // 90.      nexus 6P back,
+            // 90.      xiaomi front back
+            // 270.     nexus 6P front
             initPara(camera);
         }
 
@@ -130,6 +132,7 @@ public class CameraRecord implements SurfaceHolder.Callback {
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         Log.i(TAG, "surfaceCreated");
+
 
     }
 

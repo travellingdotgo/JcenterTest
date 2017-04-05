@@ -15,8 +15,21 @@ public class ToastUtil {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText( applicationCtx, msg, Toast.LENGTH_LONG).show();
+                //Toast.makeText( applicationCtx, msg, Toast.LENGTH_LONG).show();
+                showToast(applicationCtx, msg);
             }
         });
+    }
+
+    private static Toast toast = null;
+
+    static void showToast(Context context, String text) {
+        if (toast == null) {
+            toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
+        } else {
+            toast.setText(text);
+        }
+
+        toast.show();
     }
 }

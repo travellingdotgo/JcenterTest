@@ -30,9 +30,8 @@ public class CameraActivity extends AppCompatActivity {
     Camera.PreviewCallback previewCallback0 = new Camera.PreviewCallback(){
         @Override
         public void onPreviewFrame(byte[] data, Camera camera) {
-            //       Log.d(TAG, "previewCallback0 onPreviewFrame " );
-
             Camera.Size size = camera.getParameters().getPreviewSize();
+            Log.d(TAG, "previewCallback0 onPreviewFrame " + size.width + "  " + size.height );
             int format = camera.getParameters().getPreviewFormat();
 
             camera.addCallbackBuffer(data);
@@ -47,7 +46,7 @@ public class CameraActivity extends AppCompatActivity {
 
         surfaceView1 = (SurfaceView)findViewById(R.id.surfaceview1);
         cameraRecord1 = new CameraRecord(surfaceView1);
-        initViewSize(surfaceView1);
+        //initViewSize(surfaceView1);
 
         try{
             cameraRecord1.openCamera(CameraRecord.BACK_CAMERA, width,height, previewCallback0);

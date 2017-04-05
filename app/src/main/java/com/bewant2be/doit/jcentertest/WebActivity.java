@@ -1,12 +1,10 @@
 package com.bewant2be.doit.jcentertest;
 
 import android.annotation.TargetApi;
-import android.content.res.Configuration;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.webkit.CookieManager;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
