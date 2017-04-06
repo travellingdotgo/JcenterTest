@@ -1,5 +1,6 @@
 package com.bewant2be.doit.utilslib;
 
+import android.content.Context;
 import android.graphics.ImageFormat;
 import android.hardware.Camera;
 import android.os.Handler;
@@ -30,14 +31,18 @@ public class CameraRecord implements SurfaceHolder.Callback {
     private Camera camera;
     private Camera.PreviewCallback previewCallback;
 
+    private Context mContext;
+    private int mDisplayDegree;
+
     HandlerThread handlerThread;
 
-    public CameraRecord(SurfaceView surface) {
+    public CameraRecord(int display_degree, SurfaceView surface) {
+        mDisplayDegree = display_degree;
         holder = surface.getHolder();
         holder.addCallback(this);
         holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
-        Log.i(TAG, "constructor");
+        Log.i(TAG, "constructor. mDisplayDegree="+mDisplayDegree);
     }
 
     public void asyncopenCamera(final int cameraId, final int preview_width, final int preview_height, final Camera.PreviewCallback _previewCallback ) {
@@ -49,10 +54,9 @@ public class CameraRecord implements SurfaceHolder.Callback {
         handler.post(new Runnable() {
             @Override
             public void run() {
-                try{
-                    openCamera(cameraId, preview_width,preview_height, _previewCallback);
-                }
-                catch (Exception e){
+                try {
+                    openCamera(cameraId, preview_width, preview_height, _previewCallback);
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -131,6 +135,9 @@ public class CameraRecord implements SurfaceHolder.Callback {
             camera.startPreview();
             camera.setPreviewDisplay(holder);
 
+            int result = CameraUtil.getSuitableCameraDisplayOrientation(mDisplayDegree,mCameraId);
+            camera.setDisplayOrientation(result);
+
             if(debug){
                 Camera.Size size = parameters.getPreviewSize();
                 Log.i(TAG, "parameters.getPreviewSize: " + size.width + "*" + size.height);
@@ -164,4 +171,6 @@ public class CameraRecord implements SurfaceHolder.Callback {
             Log.i(TAG, "in surfaceDestroyed(), camera==null");
         }
     }
+
+
 }

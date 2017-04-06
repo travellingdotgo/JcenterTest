@@ -1,5 +1,6 @@
 package com.bewant2be.doit.jcentertest;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.Camera;
@@ -10,6 +11,7 @@ import android.os.Looper;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Surface;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,7 +19,9 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.bewant2be.doit.utilslib.CameraRecord;
+import com.bewant2be.doit.utilslib.CameraUtil;
 import com.bewant2be.doit.utilslib.DiagnoseUtil;
+import com.bewant2be.doit.utilslib.DisplayUtil;
 import com.bewant2be.doit.utilslib.ToastUtil;
 import com.bewant2be.doit.utilslib.service.NetworkMonitorIntentService;
 
@@ -32,6 +36,7 @@ public class CameraActivity extends AppCompatActivity {
     public final static int height = 480;
 
     private Context mContext;
+    int display_degree;
 
     Camera.PreviewCallback previewCallback1 = new Camera.PreviewCallback(){
         @Override
@@ -78,29 +83,40 @@ public class CameraActivity extends AppCompatActivity {
         setContentView(R.layout.activity_camera);
         mContext = getApplicationContext();
 
+        display_degree = DisplayUtil.getRotation(this);
+        ToastUtil.toastComptible(mContext, ""+display_degree);
+        Log.i(TAG, "display_degree = "+display_degree);
+
         initUi();
 
         int count = Camera.getNumberOfCameras();
         ToastUtil.toastComptible(mContext, "getNumberOfCameras() = " + count);
 
         final SurfaceView surfaceView1 = (SurfaceView)findViewById(R.id.surfaceview1);
-        final CameraRecord cameraRecord1 = new CameraRecord(surfaceView1);
+        final CameraRecord cameraRecord1 = new CameraRecord(display_degree,surfaceView1);
         initViewSize(surfaceView1);
         cameraRecord1.asyncopenCamera(CameraRecord.BACK_CAMERA, width, height, previewCallback1);
-        SystemClock.sleep(1000);
+        SystemClock.sleep(100);
 
         final SurfaceView surfaceView2 = (SurfaceView)findViewById(R.id.surfaceview2);
-        final CameraRecord cameraRecord2 = new CameraRecord(surfaceView2);
+        final CameraRecord cameraRecord2 = new CameraRecord(display_degree,surfaceView2);
         initViewSize(surfaceView2);
         cameraRecord2.asyncopenCamera(CameraRecord.FRONT_CAMERA, width, height, previewCallback2);
-        SystemClock.sleep(1000);
+        SystemClock.sleep(100);
 
     }
 
     private void initViewSize( final View view ){
         LinearLayout.LayoutParams params =  (LinearLayout.LayoutParams)view.getLayoutParams();
-        params.width=width;
-        params.height=height;
+
+        if ( display_degree % 180==0 ){ // 0 180
+            params.width=height;
+            params.height=width;
+        }else{              // 90 270
+            params.width=width;
+            params.height=height;
+        }
+
         view.setLayoutParams(params);
     }
 
@@ -114,4 +130,8 @@ public class CameraActivity extends AppCompatActivity {
 
 
     }
+
+
+
+
 }
