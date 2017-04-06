@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnCamera.callOnClick();
 
         Button btnWeb = (Button)findViewById(R.id.btnWeb);
         btnWeb.setOnClickListener(new View.OnClickListener() {

@@ -1,8 +1,12 @@
 package com.bewant2be.doit.jcentertest;
 
+import android.content.Context;
 import android.content.Intent;
 import android.hardware.Camera;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -24,13 +28,30 @@ public class CameraActivity extends AppCompatActivity {
     private boolean debug = BuildConfig.DEBUG;
     private boolean verbose = false;
 
-    public final static int width = 1920;
-    public final static int height = 1080;
+    public final static int width = 640;
+    public final static int height = 480;
 
-    SurfaceView surfaceView1;
-    CameraRecord cameraRecord1;
+    Camera.PreviewCallback previewCallback1 = new Camera.PreviewCallback(){
+        @Override
+        public void onPreviewFrame(byte[] data, Camera camera) {
+            ToastUtil.toastComptible(getApplicationContext(), "onPreviewFrame Thread: " + Thread.currentThread().getName());
+            if( debug && verbose ) {
+                Camera.Size size = camera.getParameters().getPreviewSize();
+                Log.d(TAG, "onPreviewFrame getPreviewSize:  " + size.width + "  " + size.height );
+                int format = camera.getParameters().getPreviewFormat();
+                Log.d(TAG, "onPreviewFrame getPreviewFormat: " + format );
+            }
 
-    Camera.PreviewCallback previewCallback0 = new Camera.PreviewCallback(){
+            // add data process here
+
+
+            // don't delete the code below
+            camera.addCallbackBuffer(data);
+        }
+    };
+
+
+    Camera.PreviewCallback previewCallback2 = new Camera.PreviewCallback(){
         @Override
         public void onPreviewFrame(byte[] data, Camera camera) {
             if( debug && verbose ) {
@@ -54,21 +75,45 @@ public class CameraActivity extends AppCompatActivity {
         setContentView(R.layout.activity_camera);
         initUi();
 
-        surfaceView1 = (SurfaceView)findViewById(R.id.surfaceview1);
-        cameraRecord1 = new CameraRecord(surfaceView1);
+        final Context context = getApplicationContext();
 
-        try{
-            cameraRecord1.openCamera(CameraRecord.FRONT_CAMERA, width,height, previewCallback0);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
+        int count = Camera.getNumberOfCameras();
+        ToastUtil.toastComptible(getApplicationContext(), "getNumberOfCameras() = " + count);
+
+        final SurfaceView surfaceView1 = (SurfaceView)findViewById(R.id.surfaceview1);
+        final CameraRecord cameraRecord1 = new CameraRecord(surfaceView1);
+        //final SurfaceView surfaceView2 = (SurfaceView)findViewById(R.id.surfaceview2);
+        //final CameraRecord cameraRecord2 = new CameraRecord(surfaceView2);
+
+        initViewSize(surfaceView1);
+        //initViewSize(surfaceView2);
+
+        HandlerThread handlerThread = new HandlerThread("camera");
+        handlerThread.start();
+
+        Looper looper = handlerThread.getLooper();
+        Handler handler = new Handler(looper);
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    ToastUtil.toastComptible(context, "OpenCamera Thread: " + Thread.currentThread().getName());
+                    cameraRecord1.openCamera(CameraRecord.FRONT_CAMERA, width, height, previewCallback1);
+                    //cameraRecord2.openCamera(CameraRecord.BACK_CAMERA, width, height, previewCallback2);
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+                SystemClock.sleep(1000);
     }
 
     private void initViewSize( final View view ){
         LinearLayout.LayoutParams params =  (LinearLayout.LayoutParams)view.getLayoutParams();
-        params.width=width/2;
-        params.height=height/2;
+        params.width=width;
+        params.height=height;
         view.setLayoutParams(params);
     }
 
