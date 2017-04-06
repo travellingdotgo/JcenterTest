@@ -17,6 +17,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+        debug {
+            buildConfigField "Boolean", "DEBUG_MODE", "true"
+        }
     }
 }
 
@@ -24,5 +28,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.0'
-    compile project(':utilslib')
+
+    releaseCompile project(path: ':utilslib', configuration: 'release')
+    debugCompile project(path: ':utilslib', configuration: 'debug')
 }

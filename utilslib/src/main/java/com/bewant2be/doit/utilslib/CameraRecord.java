@@ -54,7 +54,6 @@ public class CameraRecord implements SurfaceHolder.Callback {
         prevHeight=preview_height;
         previewCallback = _previewCallback;
 
-
         if (wichCamera>FRONT_CAMERA || wichCamera<BACK_CAMERA){
             Log.e(TAG, "wichCamera invalid");
             return;
