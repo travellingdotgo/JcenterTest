@@ -21,6 +21,9 @@ public class CameraActivity extends AppCompatActivity {
 
     private final static String TAG = "CameraActivity";
 
+    private boolean debug = BuildConfig.DEBUG;
+    private boolean verbose = false;
+
     public final static int width = 1920;
     public final static int height = 1080;
 
@@ -30,10 +33,17 @@ public class CameraActivity extends AppCompatActivity {
     Camera.PreviewCallback previewCallback0 = new Camera.PreviewCallback(){
         @Override
         public void onPreviewFrame(byte[] data, Camera camera) {
-            Camera.Size size = camera.getParameters().getPreviewSize();
-            Log.d(TAG, "previewCallback0 onPreviewFrame " + size.width + "  " + size.height );
-            int format = camera.getParameters().getPreviewFormat();
+            if( debug && verbose ) {
+                Camera.Size size = camera.getParameters().getPreviewSize();
+                Log.d(TAG, "onPreviewFrame getPreviewSize:  " + size.width + "  " + size.height );
+                int format = camera.getParameters().getPreviewFormat();
+                Log.d(TAG, "onPreviewFrame getPreviewFormat: " + format );
+            }
 
+            // add data process here
+
+
+            // don't delete the code below
             camera.addCallbackBuffer(data);
         }
     };
@@ -46,7 +56,6 @@ public class CameraActivity extends AppCompatActivity {
 
         surfaceView1 = (SurfaceView)findViewById(R.id.surfaceview1);
         cameraRecord1 = new CameraRecord(surfaceView1);
-        //initViewSize(surfaceView1);
 
         try{
             cameraRecord1.openCamera(CameraRecord.BACK_CAMERA, width,height, previewCallback0);
@@ -55,8 +64,6 @@ public class CameraActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
-
 
     private void initViewSize( final View view ){
         LinearLayout.LayoutParams params =  (LinearLayout.LayoutParams)view.getLayoutParams();

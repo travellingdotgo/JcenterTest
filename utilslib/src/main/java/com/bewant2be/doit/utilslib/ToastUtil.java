@@ -23,7 +23,7 @@ public class ToastUtil {
 
     private static Toast toast = null;
 
-    static void showToast(Context context, String text) {
+    private static void showToast(Context context, String text) {
         if (toast == null) {
             toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
         } else {

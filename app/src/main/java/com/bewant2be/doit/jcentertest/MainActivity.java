@@ -33,8 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initUi();
 
-        Intent intent = new Intent(MainActivity.this, NetworkMonitorIntentService.class);
-        startService(intent);
+        //startNetCheck();
     }
 
     @Override
@@ -75,8 +74,6 @@ public class MainActivity extends AppCompatActivity {
         btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
-
                 Intent intent = new Intent(MainActivity.this, CameraActivity.class);
                 startActivity(intent);
             }
@@ -87,8 +84,6 @@ public class MainActivity extends AppCompatActivity {
         btnWeb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
-
                 Intent intent = new Intent(MainActivity.this, WebActivity.class);
                 startActivity(intent);
             }
@@ -99,12 +94,15 @@ public class MainActivity extends AppCompatActivity {
         btnWebjs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
-
                 Intent intent = new Intent(MainActivity.this, WebjsActivity.class);
                 startActivity(intent);
             }
         });
 
+    }
+
+    private void startNetCheck(){
+        Intent intent = new Intent(MainActivity.this, NetworkMonitorIntentService.class);
+        startService(intent);
     }
 }

@@ -15,10 +15,10 @@ import java.util.List;
 public class CameraRecord implements SurfaceHolder.Callback {
     public final static String TAG = "CameraRecord";
 
-    public static final int BACK_CAMERA = 1;
-    public static final int FRONT_CAMERA = 2;
+    public static final int BACK_CAMERA = 0;
+    public static final int FRONT_CAMERA = 1;
 
-    private int id=0;
+    private int cameraId=0;
     private int prevWidth,prevHeight;
 
     private boolean debug = BuildConfig.DEBUG;
@@ -54,18 +54,21 @@ public class CameraRecord implements SurfaceHolder.Callback {
         prevHeight=preview_height;
         previewCallback = _previewCallback;
 
-        id = (wichCamera==BACK_CAMERA)?0:1;
+        cameraId = (wichCamera==BACK_CAMERA)?BACK_CAMERA:FRONT_CAMERA;
 
-        camera = Camera.open(id);
+        camera = Camera.open(cameraId);
 
-        if (camera == null)
+        if (camera == null){
             Log.e(TAG, "openCamera camera is null");
+            return;
+        }
+
         else{
             Log.i(TAG, "openCamera camera success");
             Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
-            Camera.getCameraInfo(id, cameraInfo);
-            Log.i(TAG, "camera: " + cameraInfo.facing + " " + cameraInfo.orientation  );
-            camera.setDisplayOrientation(90);
+            Camera.getCameraInfo(cameraId, cameraInfo);
+            Log.i(TAG, "camera: facing=" + cameraInfo.facing + " orientation=" + cameraInfo.orientation  );
+            //camera.setDisplayOrientation(90);
             // 0.       rk
             // 90.      nexus 6P back,
             // 90.      xiaomi front back
@@ -89,22 +92,6 @@ public class CameraRecord implements SurfaceHolder.Callback {
             camera.setPreviewDisplay(holder);
         }
     }
-
-    public void stop() {
-        Log.i(TAG, "stop()");
-
-        if(camera!=null) {
-            camera.stopPreview();
-        }
-    }
-
-    public void release() {
-        if(camera!=null) {
-            camera.release();
-        }
-        camera = null;
-    }
-
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
@@ -138,8 +125,15 @@ public class CameraRecord implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        Log.e("CameraRecord", "surfaceDestroyed");
-        stop();
-    //    release();
+        Log.i(TAG, "surfaceDestroyed");
+
+        if(camera!=null) {
+            Log.i(TAG, "in surfaceDestroyed(), camera.stopPreview");
+            camera.stopPreview();
+            camera.release();
+            camera = null;
+        }else{
+            Log.i(TAG, "in surfaceDestroyed(), camera==null");
+        }
     }
 }
