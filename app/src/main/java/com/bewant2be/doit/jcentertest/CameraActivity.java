@@ -58,7 +58,7 @@ public class CameraActivity extends AppCompatActivity {
         cameraRecord1 = new CameraRecord(surfaceView1);
 
         try{
-            cameraRecord1.openCamera(CameraRecord.BACK_CAMERA, width,height, previewCallback0);
+            cameraRecord1.openCamera(CameraRecord.FRONT_CAMERA, width,height, previewCallback0);
         }
         catch (Exception e){
             e.printStackTrace();
