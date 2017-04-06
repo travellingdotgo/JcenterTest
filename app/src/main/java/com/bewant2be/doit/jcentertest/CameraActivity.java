@@ -54,6 +54,7 @@ public class CameraActivity extends AppCompatActivity {
     Camera.PreviewCallback previewCallback2 = new Camera.PreviewCallback(){
         @Override
         public void onPreviewFrame(byte[] data, Camera camera) {
+            ToastUtil.toastComptible(getApplicationContext(), "onPreviewFrame Thread: " + Thread.currentThread().getName());
             if( debug && verbose ) {
                 Camera.Size size = camera.getParameters().getPreviewSize();
                 Log.d(TAG, "onPreviewFrame getPreviewSize:  " + size.width + "  " + size.height );
@@ -82,32 +83,16 @@ public class CameraActivity extends AppCompatActivity {
 
         final SurfaceView surfaceView1 = (SurfaceView)findViewById(R.id.surfaceview1);
         final CameraRecord cameraRecord1 = new CameraRecord(surfaceView1);
-        //final SurfaceView surfaceView2 = (SurfaceView)findViewById(R.id.surfaceview2);
-        //final CameraRecord cameraRecord2 = new CameraRecord(surfaceView2);
+        final SurfaceView surfaceView2 = (SurfaceView)findViewById(R.id.surfaceview2);
+        final CameraRecord cameraRecord2 = new CameraRecord(surfaceView2);
 
         initViewSize(surfaceView1);
-        //initViewSize(surfaceView2);
+        initViewSize(surfaceView2);
 
-        HandlerThread handlerThread = new HandlerThread("camera");
-        handlerThread.start();
-
-        Looper looper = handlerThread.getLooper();
-        Handler handler = new Handler(looper);
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                try{
-                    ToastUtil.toastComptible(context, "OpenCamera Thread: " + Thread.currentThread().getName());
-                    cameraRecord1.openCamera(CameraRecord.FRONT_CAMERA, width, height, previewCallback1);
-                    //cameraRecord2.openCamera(CameraRecord.BACK_CAMERA, width, height, previewCallback2);
-                }
-                catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-        });
-
-                SystemClock.sleep(1000);
+        cameraRecord1.asyncopenCamera(CameraRecord.BACK_CAMERA, width, height, previewCallback1);
+        SystemClock.sleep(1000);
+        cameraRecord2.asyncopenCamera(CameraRecord.FRONT_CAMERA, width, height, previewCallback2);
+        SystemClock.sleep(1000);
     }
 
     private void initViewSize( final View view ){
@@ -124,6 +109,7 @@ public class CameraActivity extends AppCompatActivity {
     }
 
     public void initUi(){
+
 
     }
 }
