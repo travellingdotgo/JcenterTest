@@ -31,10 +31,12 @@ public class CameraActivity extends AppCompatActivity {
     public final static int width = 640;
     public final static int height = 480;
 
+    private Context mContext;
+
     Camera.PreviewCallback previewCallback1 = new Camera.PreviewCallback(){
         @Override
         public void onPreviewFrame(byte[] data, Camera camera) {
-            ToastUtil.toastComptible(getApplicationContext(), "onPreviewFrame Thread: " + Thread.currentThread().getName());
+            ToastUtil.toastComptible(mContext, "onPreviewFrame Thread: " + Thread.currentThread().getName());
             if( debug && verbose ) {
                 Camera.Size size = camera.getParameters().getPreviewSize();
                 Log.d(TAG, "onPreviewFrame getPreviewSize:  " + size.width + "  " + size.height );
@@ -54,7 +56,7 @@ public class CameraActivity extends AppCompatActivity {
     Camera.PreviewCallback previewCallback2 = new Camera.PreviewCallback(){
         @Override
         public void onPreviewFrame(byte[] data, Camera camera) {
-            ToastUtil.toastComptible(getApplicationContext(), "onPreviewFrame Thread: " + Thread.currentThread().getName());
+            ToastUtil.toastComptible(mContext, "onPreviewFrame Thread: " + Thread.currentThread().getName());
             if( debug && verbose ) {
                 Camera.Size size = camera.getParameters().getPreviewSize();
                 Log.d(TAG, "onPreviewFrame getPreviewSize:  " + size.width + "  " + size.height );
@@ -74,25 +76,25 @@ public class CameraActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
+        mContext = getApplicationContext();
+
         initUi();
 
-        final Context context = getApplicationContext();
-
         int count = Camera.getNumberOfCameras();
-        ToastUtil.toastComptible(getApplicationContext(), "getNumberOfCameras() = " + count);
+        ToastUtil.toastComptible(mContext, "getNumberOfCameras() = " + count);
 
         final SurfaceView surfaceView1 = (SurfaceView)findViewById(R.id.surfaceview1);
         final CameraRecord cameraRecord1 = new CameraRecord(surfaceView1);
-        final SurfaceView surfaceView2 = (SurfaceView)findViewById(R.id.surfaceview2);
-        final CameraRecord cameraRecord2 = new CameraRecord(surfaceView2);
-
         initViewSize(surfaceView1);
-        initViewSize(surfaceView2);
-
         cameraRecord1.asyncopenCamera(CameraRecord.BACK_CAMERA, width, height, previewCallback1);
         SystemClock.sleep(1000);
+
+        final SurfaceView surfaceView2 = (SurfaceView)findViewById(R.id.surfaceview2);
+        final CameraRecord cameraRecord2 = new CameraRecord(surfaceView2);
+        initViewSize(surfaceView2);
         cameraRecord2.asyncopenCamera(CameraRecord.FRONT_CAMERA, width, height, previewCallback2);
         SystemClock.sleep(1000);
+
     }
 
     private void initViewSize( final View view ){

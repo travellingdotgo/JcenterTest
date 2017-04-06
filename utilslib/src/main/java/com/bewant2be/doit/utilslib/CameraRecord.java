@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Created by haidong.chen on 1/17/17.
+ * Created by user on 1/17/17.
  */
 public class CameraRecord implements SurfaceHolder.Callback {
     public final static String TAG = "CameraRecord";
@@ -39,20 +39,6 @@ public class CameraRecord implements SurfaceHolder.Callback {
 
         Log.i(TAG, "constructor");
     }
-
-    private void initPara( Camera camera ){
-        Camera.Parameters parameters = camera.getParameters();
-        if (debug){
-            List<Camera.Size> lists = parameters.getSupportedPictureSizes();
-            for (Camera.Size size: lists){
-                Log.v(TAG, "size: " + size.width + "*" + size.height);
-            }
-        }
-
-        parameters.setPreviewSize(prevWidth, prevHeight);
-        camera.setParameters(parameters);
-    }
-
 
     public void asyncopenCamera(final int cameraId, final int preview_width, final int preview_height, final Camera.PreviewCallback _previewCallback ) {
         handlerThread = new HandlerThread("Thread-Camera-"+cameraId);
@@ -99,29 +85,22 @@ public class CameraRecord implements SurfaceHolder.Callback {
             Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
             Camera.getCameraInfo(mCameraId, cameraInfo);
             Log.i(TAG, "camera: facing=" + cameraInfo.facing + " orientation=" + cameraInfo.orientation  );
-            //camera.setDisplayOrientation(90);
-            // 0.       rk
-            // 90.      nexus 6P back,
-            // 90.      xiaomi front back
-            // 270.     nexus 6P front
-            initPara(camera);
+
+            Camera.Parameters parameters = camera.getParameters();
+            if (debug){
+                List<Camera.Size> lists = parameters.getSupportedPictureSizes();
+                for (Camera.Size size: lists){
+                    Log.v(TAG, "size: " + size.width + "*" + size.height);
+                }
+            }
+
+            parameters.setPreviewSize(prevWidth, prevHeight);
+            camera.setParameters(parameters);
         }
 
     }
 
     private void start() throws IOException {
-        Log.i(TAG, "start()");
-
-        if(camera!=null) {
-            if( previewCallback!=null ){
-                int bufferSize = prevWidth*prevHeight * ImageFormat.getBitsPerPixel(camera.getParameters().getPreviewFormat()) / 8;
-                camera.addCallbackBuffer(new byte[bufferSize]);
-                Log.i(TAG, "addCallbackBuffer");
-                camera.setPreviewCallbackWithBuffer( previewCallback );
-            }
-            camera.startPreview();
-            camera.setPreviewDisplay(holder);
-        }
     }
 
     @Override
@@ -133,10 +112,26 @@ public class CameraRecord implements SurfaceHolder.Callback {
             return ;
         }
 
+        if( previewCallback==null ){
+            Log.e(TAG, "previewCallback==null");
+            return ;
+        }
+
         try {
-            start();
             Camera.Parameters parameters = camera.getParameters();
-            if(parameters!=null){
+            if(parameters==null){
+                Log.e(TAG, "getParameters null");
+                return;
+            }
+            int bufferSize = prevWidth*prevHeight * ImageFormat.getBitsPerPixel(parameters.getPreviewFormat()) / 8;
+            camera.addCallbackBuffer(new byte[bufferSize]);
+            Log.i(TAG, "addCallbackBuffer");
+            camera.setPreviewCallbackWithBuffer(previewCallback);
+
+            camera.startPreview();
+            camera.setPreviewDisplay(holder);
+
+            if(debug){
                 Camera.Size size = parameters.getPreviewSize();
                 Log.i(TAG, "parameters.getPreviewSize: " + size.width + "*" + size.height);
             }
