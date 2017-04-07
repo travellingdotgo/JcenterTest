@@ -33,6 +33,7 @@ public class CameraRecord implements SurfaceHolder.Callback {
 
     private Context mContext;
     private int mDisplayDegree;
+    public int mCameraDisplayOrientation;
 
     HandlerThread handlerThread;
 
@@ -135,8 +136,8 @@ public class CameraRecord implements SurfaceHolder.Callback {
             camera.startPreview();
             camera.setPreviewDisplay(holder);
 
-            int result = CameraUtil.getSuitableCameraDisplayOrientation(mDisplayDegree,mCameraId);
-            camera.setDisplayOrientation(result);
+            mCameraDisplayOrientation = CameraUtil.getSuitableCameraDisplayOrientation(mDisplayDegree,mCameraId);
+            camera.setDisplayOrientation(mCameraDisplayOrientation);
 
             if(debug){
                 Camera.Size size = parameters.getPreviewSize();
@@ -162,6 +163,7 @@ public class CameraRecord implements SurfaceHolder.Callback {
 
         if(camera!=null) {
             Log.i(TAG, "in surfaceDestroyed(), camera.stopPreview");
+            camera.setPreviewCallback(null);
             camera.stopPreview();
             camera.release();
             camera = null;

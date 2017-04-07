@@ -3,6 +3,12 @@ package com.bewant2be.doit.jcentertest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.ImageFormat;
+import android.graphics.Matrix;
+import android.graphics.Rect;
+import android.graphics.YuvImage;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,6 +22,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.bewant2be.doit.utilslib.CameraRecord;
@@ -24,6 +31,8 @@ import com.bewant2be.doit.utilslib.DiagnoseUtil;
 import com.bewant2be.doit.utilslib.DisplayUtil;
 import com.bewant2be.doit.utilslib.ToastUtil;
 import com.bewant2be.doit.utilslib.service.NetworkMonitorIntentService;
+
+import java.io.ByteArrayOutputStream;
 
 public class CameraActivity extends AppCompatActivity {
 
@@ -37,6 +46,8 @@ public class CameraActivity extends AppCompatActivity {
 
     private Context mContext;
     int display_degree;
+
+    private CameraRecord cameraRecord1,cameraRecord2;
 
     Camera.PreviewCallback previewCallback1 = new Camera.PreviewCallback(){
         @Override
@@ -60,7 +71,7 @@ public class CameraActivity extends AppCompatActivity {
 
     Camera.PreviewCallback previewCallback2 = new Camera.PreviewCallback(){
         @Override
-        public void onPreviewFrame(byte[] data, Camera camera) {
+        public void onPreviewFrame(final byte[] data, Camera camera) {
             ToastUtil.toastComptible(mContext, "onPreviewFrame Thread: " + Thread.currentThread().getName());
             if( debug && verbose ) {
                 Camera.Size size = camera.getParameters().getPreviewSize();
@@ -84,8 +95,8 @@ public class CameraActivity extends AppCompatActivity {
         mContext = getApplicationContext();
 
         display_degree = DisplayUtil.getRotation(this);
-        ToastUtil.toastComptible(mContext, ""+display_degree);
-        Log.i(TAG, "display_degree = "+display_degree);
+        ToastUtil.toastComptible(mContext, "" + display_degree);
+        Log.i(TAG, "display_degree = " + display_degree);
 
         initUi();
 
@@ -93,17 +104,16 @@ public class CameraActivity extends AppCompatActivity {
         ToastUtil.toastComptible(mContext, "getNumberOfCameras() = " + count);
 
         final SurfaceView surfaceView1 = (SurfaceView)findViewById(R.id.surfaceview1);
-        final CameraRecord cameraRecord1 = new CameraRecord(display_degree,surfaceView1);
+        cameraRecord1 = new CameraRecord(display_degree,surfaceView1);
         initViewSize(surfaceView1);
         cameraRecord1.asyncopenCamera(CameraRecord.BACK_CAMERA, width, height, previewCallback1);
-        SystemClock.sleep(100);
+        SystemClock.sleep(1000);
 
         final SurfaceView surfaceView2 = (SurfaceView)findViewById(R.id.surfaceview2);
-        final CameraRecord cameraRecord2 = new CameraRecord(display_degree,surfaceView2);
+        cameraRecord2 = new CameraRecord(display_degree,surfaceView2);
         initViewSize(surfaceView2);
         cameraRecord2.asyncopenCamera(CameraRecord.FRONT_CAMERA, width, height, previewCallback2);
-        SystemClock.sleep(100);
-
+        SystemClock.sleep(1000);
     }
 
     private void initViewSize( final View view ){

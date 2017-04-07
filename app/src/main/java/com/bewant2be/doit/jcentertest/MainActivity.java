@@ -39,7 +39,14 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        requestPermissions();
+
+        // show system info
+        int sdk = Build.VERSION.SDK_INT;
+        Log.i(TAG, "system build sdk: " + sdk);
+        ToastUtil.toastComptible(getApplicationContext(), "build sdk: " + sdk);
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
+            requestPermissions();
+        }
 
         initUi();
 
