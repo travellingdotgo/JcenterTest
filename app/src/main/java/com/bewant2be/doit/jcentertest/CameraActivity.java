@@ -98,6 +98,13 @@ public class CameraActivity extends AppCompatActivity {
         ToastUtil.toastComptible(mContext, "" + display_degree);
         Log.i(TAG, "display_degree = " + display_degree);
 
+        LinearLayout linearLayout = (LinearLayout)findViewById(R.id.ll_surfaces);
+        if(display_degree % 180==0){
+            linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+        }else{
+            linearLayout.setOrientation(LinearLayout.VERTICAL);
+        }
+
         initUi();
 
         int count = Camera.getNumberOfCameras();
