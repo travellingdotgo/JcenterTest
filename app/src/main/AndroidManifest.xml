@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.bewant2be.doit.jcentertest">
 
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
+    <uses-permission android:name="android.permission.ACTION_MANAGE_OVERLAY_PERMISSION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,20 +19,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".CameraActivity">
-        </activity>
-
+        <activity android:name=".CameraActivity"></activity>
         <activity
             android:name=".WebActivity"
-            android:screenOrientation="portrait">
-        </activity>
-
-        <activity android:name=".WebjsActivity">
-        </activity>
-
-
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".WebjsActivity"></activity>
 
         <receiver android:name=".receiver.StatusReceiver">
             <intent-filter>
@@ -39,6 +34,10 @@
         <service
             android:name="com.bewant2be.doit.utilslib.service.NetworkMonitorIntentService"
             android:exported="false" />
+
+        <activity android:name=".OverlayActivity">
+
+        </activity>
     </application>
 
 </manifest>

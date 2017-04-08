@@ -117,6 +117,17 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+
+
+        Button btnOverlay = (Button)findViewById(R.id.btnOverlay);
+        btnOverlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, OverlayActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void startNetCheck(){
