@@ -37,6 +37,10 @@ public class CameraRecord implements SurfaceHolder.Callback {
 
     HandlerThread handlerThread;
 
+    public interface OpenCallback{
+        public void onCallback(int result);
+    }
+
     public CameraRecord(int display_degree, SurfaceView surface) {
         mDisplayDegree = display_degree;
         holder = surface.getHolder();
@@ -46,7 +50,7 @@ public class CameraRecord implements SurfaceHolder.Callback {
         Log.i(TAG, "constructor. mDisplayDegree="+mDisplayDegree);
     }
 
-    public void asyncopenCamera(final int cameraId, final int preview_width, final int preview_height, final Camera.PreviewCallback _previewCallback ) {
+    public void asyncopenCamera(final int cameraId, final int preview_width, final int preview_height, final Camera.PreviewCallback _previewCallback, final OpenCallback openCallback ) {
         handlerThread = new HandlerThread("Thread-Camera-"+cameraId);
         handlerThread.start();
 
@@ -57,6 +61,7 @@ public class CameraRecord implements SurfaceHolder.Callback {
             public void run() {
                 try {
                     openCamera(cameraId, preview_width, preview_height, _previewCallback);
+                    openCallback.onCallback(0);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

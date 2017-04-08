@@ -33,6 +33,7 @@ import com.bewant2be.doit.utilslib.ToastUtil;
 import com.bewant2be.doit.utilslib.service.NetworkMonitorIntentService;
 
 import java.io.ByteArrayOutputStream;
+import java.util.concurrent.Semaphore;
 
 public class CameraActivity extends AppCompatActivity {
 
@@ -106,21 +107,15 @@ public class CameraActivity extends AppCompatActivity {
         }
 
         initUi();
+        initCamera();
 
-        int count = Camera.getNumberOfCameras();
-        ToastUtil.toastComptible(mContext, "getNumberOfCameras() = " + count);
+    }
 
-        final SurfaceView surfaceView1 = (SurfaceView)findViewById(R.id.surfaceview1);
-        cameraRecord1 = new CameraRecord(display_degree,surfaceView1);
-        initViewSize(surfaceView1);
-        cameraRecord1.asyncopenCamera(CameraRecord.BACK_CAMERA, width, height, previewCallback1);
-        SystemClock.sleep(1000);
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-        final SurfaceView surfaceView2 = (SurfaceView)findViewById(R.id.surfaceview2);
-        cameraRecord2 = new CameraRecord(display_degree,surfaceView2);
-        initViewSize(surfaceView2);
-        cameraRecord2.asyncopenCamera(CameraRecord.FRONT_CAMERA, width, height, previewCallback2);
-        SystemClock.sleep(1000);
+
     }
 
     private void initViewSize( final View view ){
@@ -143,11 +138,46 @@ public class CameraActivity extends AppCompatActivity {
 
     }
 
-    public void initUi(){
-
+    private void initUi(){
 
     }
 
+
+    private void initCamera(){
+
+        int count = Camera.getNumberOfCameras();
+        ToastUtil.toastComptible(mContext, "getNumberOfCameras() = " + count);
+
+        final Semaphore semaphore = new Semaphore(1);
+        CameraRecord.OpenCallback openCallback = new CameraRecord.OpenCallback(){
+            @Override
+            public void onCallback(int result) {
+                semaphore.release();
+            }
+        };
+
+        try{
+            Log.i(TAG, "waiting to open cameras 1");
+            semaphore.acquire();
+            final SurfaceView surfaceView1 = (SurfaceView)findViewById(R.id.surfaceview1);
+            cameraRecord1 = new CameraRecord(display_degree,surfaceView1);
+            initViewSize(surfaceView1);
+            cameraRecord1.asyncopenCamera(CameraRecord.BACK_CAMERA, width, height, previewCallback1, openCallback);
+
+            Log.i(TAG, "waiting to open cameras 2");
+            semaphore.acquire();
+            final SurfaceView surfaceView2 = (SurfaceView)findViewById(R.id.surfaceview2);
+            cameraRecord2 = new CameraRecord(display_degree,surfaceView2);
+            initViewSize(surfaceView2);
+            cameraRecord2.asyncopenCamera(CameraRecord.FRONT_CAMERA, width, height, previewCallback2, openCallback);
+
+            Log.i(TAG, "waiting for camera2 opening result");
+            semaphore.acquire();
+            semaphore.release();
+        }catch (Exception e){
+            Log.e(TAG, e.toString());
+        }
+    }
 
 
 
