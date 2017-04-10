@@ -128,6 +128,16 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+
+
+        Button btnRecyclerview = (Button)findViewById(R.id.btnRecyclerview);
+        btnRecyclerview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, RecyclerviewActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void startNetCheck(){

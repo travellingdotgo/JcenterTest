@@ -19,11 +19,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CameraActivity"></activity>
+        <activity android:name=".CameraActivity" />
         <activity
             android:name=".WebActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".WebjsActivity"></activity>
+            android:screenOrientation="portrait" />
+        <activity android:name=".WebjsActivity" />
+
+        <activity android:name=".OverlayActivity" />
+        <activity android:name=".RecyclerviewActivity" />
 
         <receiver android:name=".receiver.StatusReceiver">
             <intent-filter>
@@ -35,9 +38,6 @@
             android:name="com.bewant2be.doit.utilslib.service.NetworkMonitorIntentService"
             android:exported="false" />
 
-        <activity android:name=".OverlayActivity">
-
-        </activity>
     </application>
 
 </manifest>
