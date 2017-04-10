@@ -23,6 +23,8 @@ import android.widget.Toast;
 
 import com.bewant2be.doit.utilslib.CameraRecord;
 import com.bewant2be.doit.utilslib.DiagnoseUtil;
+import com.bewant2be.doit.utilslib.ShellUtil;
+import com.bewant2be.doit.utilslib.ThreadUtil;
 import com.bewant2be.doit.utilslib.ToastUtil;
 import com.bewant2be.doit.utilslib.service.NetworkMonitorIntentService;
 
@@ -30,6 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -62,28 +65,18 @@ public class MainActivity extends AppCompatActivity{
                     @Override
                     public void onResult(boolean b) {
                         if (b) {
-                            Log.i(TAG, "MainThread working fine");
+                            Log.i(TAG, "MainThread working fine ");
                         } else {
-                            Log.i(TAG, "MainThread working not fine");
+                            Log.i(TAG, "MainThread block detected ");
+                            String stack = ThreadUtil.getMainThreadStacktrace();
+                            Log.e(TAG, "getMainThreadStacktrace:  \n" + stack);
                         }
                     }
                 }
         );
-    }
 
-    private void testToast(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                int i = 0;
-
-                while( true ){
-                    i++;
-                    SystemClock.sleep( 1*1000 );
-                    ToastUtil.toastComptible(getApplicationContext(), "a toast msg from bg i=" + i );
-                }
-            }
-        }).start();
+        // block the main thread on purpose
+        SystemClock.sleep(1*1000);
     }
 
     public void initUi(){

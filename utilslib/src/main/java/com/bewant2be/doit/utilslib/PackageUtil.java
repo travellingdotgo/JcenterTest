@@ -12,7 +12,7 @@ public class PackageUtil {
     /**
      * get App versionCode
      * @param context
-     * @return
+     * @return versionCode
      */
     public String getVersionCode(Context context){
         PackageManager packageManager=context.getPackageManager();
@@ -30,7 +30,7 @@ public class PackageUtil {
     /**
      * get App versionName
      * @param context
-     * @return
+     * @return versionName
      */
     public String getVersionName(Context context){
         PackageManager packageManager=context.getPackageManager();
