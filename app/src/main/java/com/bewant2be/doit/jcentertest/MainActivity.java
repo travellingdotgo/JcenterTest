@@ -80,8 +80,7 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void initUi(){
-        Button btnCamera = (Button)findViewById(R.id.btnCamera);
-        btnCamera.setOnClickListener(new View.OnClickListener() {
+        ((Button)findViewById(R.id.btnCamera)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CameraActivity.class);
@@ -91,8 +90,7 @@ public class MainActivity extends AppCompatActivity{
 
         //btnCamera.callOnClick();
 
-        Button btnWeb = (Button)findViewById(R.id.btnWeb);
-        btnWeb.setOnClickListener(new View.OnClickListener() {
+        ((Button)findViewById(R.id.btnWeb)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, WebActivity.class);
@@ -101,8 +99,7 @@ public class MainActivity extends AppCompatActivity{
         });
 
 
-        Button btnWebjs = (Button)findViewById(R.id.btnWebjs);
-        btnWebjs.setOnClickListener(new View.OnClickListener() {
+        ((Button)findViewById(R.id.btnWebjs)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, WebjsActivity.class);
@@ -111,9 +108,7 @@ public class MainActivity extends AppCompatActivity{
         });
 
 
-
-        Button btnOverlay = (Button)findViewById(R.id.btnOverlay);
-        btnOverlay.setOnClickListener(new View.OnClickListener() {
+        ((Button)findViewById(R.id.btnOverlay)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, OverlayActivity.class);
@@ -121,13 +116,18 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
-
-
-        Button btnRecyclerview = (Button)findViewById(R.id.btnRecyclerview);
-        btnRecyclerview.setOnClickListener(new View.OnClickListener() {
+        ((Button)findViewById(R.id.btnRecyclerview)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, RecyclerviewActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ((Button)findViewById(R.id.btnCameraview)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, CameraviewActivity.class);
                 startActivity(intent);
             }
         });
