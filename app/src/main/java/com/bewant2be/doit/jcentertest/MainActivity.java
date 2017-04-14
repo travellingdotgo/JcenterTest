@@ -2,6 +2,7 @@ package com.bewant2be.doit.jcentertest;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
@@ -37,11 +38,14 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity{
 
     private final static String TAG = "MainActivity";
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        context = getApplicationContext();
 
         // show system info
         int sdk = Build.VERSION.SDK_INT;
@@ -76,7 +80,7 @@ public class MainActivity extends AppCompatActivity{
         );
 
         // block the main thread on purpose
-        SystemClock.sleep(1*1000);
+        SystemClock.sleep(1 * 1000);
     }
 
     public void initUi(){
@@ -129,6 +133,23 @@ public class MainActivity extends AppCompatActivity{
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CameraviewActivity.class);
                 startActivity(intent);
+            }
+        });
+
+
+        ((Button)findViewById(R.id.btnShellUtil)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean b = ShellUtil.isRooted();
+                ToastUtil.toastComptible(getApplicationContext(), "isRooted: " + b);
+
+                if(b){
+                    SystemClock.sleep(1000);
+
+                    String cmd = "ifconfig eth0 down";
+                    String str = ShellUtil.executeAsRootUnstable(cmd);
+                    ToastUtil.toastComptible(getApplicationContext(), cmd + "  result: \n" + str);
+                }
             }
         });
     }
