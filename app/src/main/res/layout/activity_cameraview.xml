@@ -4,9 +4,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <com.bewant2be.doit.utilslib.CameraView
-        android:id="@+id/cameraView1"
+
+
+    <LinearLayout
+        android:id="@+id/ll_surfaces"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" >
+        <com.bewant2be.doit.utilslib.CameraView
+            android:id="@+id/cameraView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_meg"
+            android:layout_width="3dp"
+            android:layout_height="3dp" />
+
+        <!--  -->
+        <com.bewant2be.doit.utilslib.CameraView
+            android:id="@+id/cameraView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
 
 </RelativeLayout>

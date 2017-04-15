@@ -25,11 +25,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.bewant2be.doit.utilslib.CameraRecord;
-import com.bewant2be.doit.utilslib.CameraUtil;
-import com.bewant2be.doit.utilslib.DiagnoseUtil;
-import com.bewant2be.doit.utilslib.DisplayUtil;
-import com.bewant2be.doit.utilslib.ToastUtil;
+import com.bewant2be.doit.utilslib.*;
+import com.bewant2be.doit.utilslib.BuildConfig;
 import com.bewant2be.doit.utilslib.service.NetworkMonitorIntentService;
 
 import java.io.ByteArrayOutputStream;
@@ -39,7 +36,6 @@ public class CameraActivity extends AppCompatActivity {
 
     private final static String TAG = "CameraActivity";
 
-    private boolean debug = BuildConfig.DEBUG;
     private boolean verbose = false;
 
     public final static int width = 640;
@@ -54,7 +50,7 @@ public class CameraActivity extends AppCompatActivity {
         @Override
         public void onPreviewFrame(byte[] data, Camera camera) {
             ToastUtil.toastComptible(mContext, "onPreviewFrame Thread: " + Thread.currentThread().getName());
-            if( debug && verbose ) {
+            if( BuildConfig.DEBUG && verbose ) {
                 Camera.Size size = camera.getParameters().getPreviewSize();
                 Log.d(TAG, "onPreviewFrame getPreviewSize:  " + size.width + "  " + size.height );
                 int format = camera.getParameters().getPreviewFormat();
@@ -74,7 +70,7 @@ public class CameraActivity extends AppCompatActivity {
         @Override
         public void onPreviewFrame(final byte[] data, Camera camera) {
             ToastUtil.toastComptible(mContext, "onPreviewFrame Thread: " + Thread.currentThread().getName());
-            if( debug && verbose ) {
+            if( BuildConfig.DEBUG && verbose ) {
                 Camera.Size size = camera.getParameters().getPreviewSize();
                 Log.d(TAG, "onPreviewFrame getPreviewSize:  " + size.width + "  " + size.height );
                 int format = camera.getParameters().getPreviewFormat();

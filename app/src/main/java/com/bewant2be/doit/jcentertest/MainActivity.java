@@ -137,6 +137,8 @@ public class MainActivity extends AppCompatActivity{
         });
 
 
+        //((Button)findViewById(R.id.btnCameraview)).callOnClick();
+
         ((Button)findViewById(R.id.btnShellUtil)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

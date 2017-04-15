@@ -110,9 +110,6 @@ public class CameraRecord implements SurfaceHolder.Callback {
 
     }
 
-    private void start() throws IOException {
-    }
-
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
         Log.i(TAG, "surfaceChanged");
@@ -158,7 +155,6 @@ public class CameraRecord implements SurfaceHolder.Callback {
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         Log.i(TAG, "surfaceCreated");
-
 
     }
 
