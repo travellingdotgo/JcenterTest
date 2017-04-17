@@ -49,8 +49,10 @@ public class MainActivity extends AppCompatActivity{
 
         // show system info
         int sdk = Build.VERSION.SDK_INT;
-        Log.i(TAG, "system build sdk: " + sdk);
-        ToastUtil.toastComptible(getApplicationContext(), "build sdk: " + sdk);
+        String s = "build sdk: " + sdk + "\n"
+                +   "VERSION_CODE: " + BuildConfig.VERSION_CODE;
+        Log.i(TAG, s);
+        ToastUtil.toastComptible(getApplicationContext(), s);
         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
             requestPermissions();
         }
@@ -145,13 +147,23 @@ public class MainActivity extends AppCompatActivity{
                 boolean b = ShellUtil.isRooted();
                 ToastUtil.toastComptible(getApplicationContext(), "isRooted: " + b);
 
+                String cmd = "whoami";
+                String result = ShellUtil.execute(cmd);
+                ToastUtil.toastComptible(getApplicationContext(), cmd + "\n- - - - - - - - - -\n" + result);
+
+                cmd = "ls /system/xbin/su";
+                result = ShellUtil.execute(cmd);
+                ToastUtil.toastComptible(getApplicationContext(),  cmd + "\n- - - - - - - - - -\n" + result);
+
                 if(b){
                     SystemClock.sleep(1000);
 
-                    String cmd = "ifconfig eth0 down";
-                    String str = ShellUtil.executeAsRootUnstable(cmd);
-                    ToastUtil.toastComptible(getApplicationContext(), cmd + "  result: \n" + str);
+                    cmd = "ifconfig eth0 down";
+                    result = ShellUtil.executeAsRootUnstable(cmd);
+                    ToastUtil.toastComptible(getApplicationContext(), cmd + "\n" + result);
                 }
+
+                ShellUtil.executeAsRoot("reboot");
             }
         });
     }

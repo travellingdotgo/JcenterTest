@@ -128,10 +128,16 @@ public class ShellUtil {
     public static boolean isRooted() {
         String binPath = "/system/bin/su";
         String xBinPath = "/system/xbin/su";
-        if (new File(binPath).exists() && isExecutable(binPath))
+        if (new File(binPath).exists() && isExecutable(binPath)){
+            Log.v(TAG, "binPath matches");
             return true;
-        if (new File(xBinPath).exists() && isExecutable(xBinPath))
+        }
+        if (new File(xBinPath).exists() && isExecutable(xBinPath)){
+            Log.v(TAG, "xBinPath matches");
             return true;
+        }
+
+        Log.v(TAG, "not binPath nor xBinPath");
         return false;
     }
 
@@ -144,13 +150,15 @@ public class ShellUtil {
             BufferedReader in = new BufferedReader(new InputStreamReader(
                     p.getInputStream()));
             String str = in.readLine();
-            Log.i(TAG, str);
+            Log.i(TAG, str==null?"null":str);
             if (str != null && str.length() >= 4) {
                 char flag = str.charAt(3);
                 if (flag == 's' || flag == 'x')
                     return true;
             }
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
             e.printStackTrace();
         }finally{
             if(p!=null){
