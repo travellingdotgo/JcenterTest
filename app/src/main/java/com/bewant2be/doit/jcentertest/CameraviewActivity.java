@@ -58,9 +58,9 @@ public class CameraviewActivity extends AppCompatActivity {
 
         LinearLayout linearLayout = (LinearLayout)findViewById(R.id.ll_surfaces);
         if(display_degree % 180==0){
-            linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-        }else{
             linearLayout.setOrientation(LinearLayout.VERTICAL);
+        }else{
+            linearLayout.setOrientation(LinearLayout.HORIZONTAL);
         }
     }
 

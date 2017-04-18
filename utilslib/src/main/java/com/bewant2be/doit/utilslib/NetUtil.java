@@ -8,6 +8,7 @@ import java.net.UnknownHostException;
  */
 public class NetUtil {
 
+    public final static String TAG = "NetUtil";
 
     public static long shellPing(){
         boolean isReachable = false;

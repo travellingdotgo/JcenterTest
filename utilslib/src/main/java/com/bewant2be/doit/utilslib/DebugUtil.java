@@ -4,6 +4,8 @@ package com.bewant2be.doit.utilslib;
  * Created by user on 3/29/17.
  */
 public class DebugUtil {
+    private final static String TAG = "DebugUtil";
+
     public final static String byte2hex(byte [] buffer){
         String h = "";
 

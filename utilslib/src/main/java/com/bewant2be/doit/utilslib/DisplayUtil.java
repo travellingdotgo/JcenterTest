@@ -8,6 +8,7 @@ import android.view.WindowManager;
  * Created by user on 4/6/17.
  */
 public class DisplayUtil {
+    private final static String TAG = "DisplayUtil";
 
     public static int getRotation(Activity activity) {
 

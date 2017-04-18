@@ -16,6 +16,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.Semaphore;
 
 /**
  * Created by user on 4/12/17.
@@ -88,6 +89,8 @@ public class CameraView extends SurfaceView {
 
     private void initCamera(final int cameraId, final int preview_width, final int preview_height, final Camera.PreviewCallback _previewCallback, final OpenCallback openCallback ) {
         Log.i(TAG, "initCamera ");
+        final Semaphore semaphore = new Semaphore(1);
+        try{ semaphore.acquire(); }catch (Exception e){ }
 
         handlerThread = new HandlerThread("CameraView-"+cameraId);
         handlerThread.start();
@@ -98,13 +101,14 @@ public class CameraView extends SurfaceView {
             public void run() {
                 try {
                     openCamera(cameraId, preview_width, preview_height, _previewCallback);
+                    semaphore.release();
                 } catch (Exception e) {
                     Log.e(TAG, e.toString());
                 }
             }
         });// end of post
 
-        SystemClock.sleep(200);
+        try{ semaphore.acquire();  semaphore.release(); }catch (Exception e){ }
     }
 
 
@@ -192,7 +196,10 @@ public class CameraView extends SurfaceView {
             Log.i(TAG, "surfaceCreated ");
 
             Log.i(TAG, "mCameraId=" + mCameraId);
+            long start = System.currentTimeMillis();
             initCamera(mCameraId, CAMERA_WIDTH, CAMERA_HEIGHT, previewCallback != null ? previewCallback : null, null);
+            long timeMillis = System.currentTimeMillis() - start;
+            ToastUtil.toastComptible(getContext(), "timeMillis: "+timeMillis);
         }
 
         @Override

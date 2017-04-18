@@ -5,6 +5,7 @@ import android.hardware.Camera;
  * Created by user on 4/6/17.
  */
 public class CameraUtil {
+    public final static String TAG = "CameraUtil";
 
     public static int getSuitableCameraDisplayOrientation(int  display_degrees, int cameraId) {
 
