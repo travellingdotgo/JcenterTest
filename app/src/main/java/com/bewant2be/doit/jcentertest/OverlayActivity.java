@@ -23,6 +23,7 @@ public class OverlayActivity extends AppCompatActivity {
     private WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
     private static WindowManager windowManager;
     private static ImageView imageView;
+    View view;
 
 
     @Override
@@ -78,9 +79,12 @@ public class OverlayActivity extends AppCompatActivity {
         imageView = new ImageView(getApplicationContext());
         imageView.setImageResource(R.mipmap.ic_launcher);
 
+        view = getLayoutInflater().inflate(R.layout.view_float, null);
+
         // TYPE_SYSTEM_ALERT 允许接收事件
         // TYPE_SYSTEM_OVERLAY 悬浮在系统上
-        lp.type =  WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY;
+        lp.type =  WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
+        //         | WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY;
 
         // FLAG_NOT_TOUCH_MODAL不阻塞事件传递到后面的窗口
         // FLAG_NOT_FOCUSABLE 悬浮窗口较小时，后面的应用图标由不可长按变为可长按,不设置这个flag的话，home页的划屏会有问题
@@ -97,10 +101,10 @@ public class OverlayActivity extends AppCompatActivity {
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
         lp.format = PixelFormat.TRANSPARENT;
-        windowManager.addView(imageView,lp);
+        windowManager.addView(view,lp);
 
         //设置悬浮窗监听事件
-        imageView.setOnTouchListener(new View.OnTouchListener() {
+        view.setOnTouchListener(new View.OnTouchListener() {
             private float lastX; //上一次位置的X.Y坐标
             private float lastY;
             private float nowX;  //当前移动位置的X.Y坐标
@@ -118,6 +122,7 @@ public class OverlayActivity extends AppCompatActivity {
                         ret = true;
                         break;
                     case MotionEvent.ACTION_MOVE:
+                        ToastUtil.toastComptible(getApplicationContext(), "ACTION_MOVE");
                         nowX = event.getRawX();
                         nowY = event.getRawY();
                         tranX = nowX - lastX;
@@ -127,7 +132,7 @@ public class OverlayActivity extends AppCompatActivity {
                         lp.x += tranX;
                         lp.y += tranY;
 
-                        windowManager.updateViewLayout(imageView,lp);
+                        windowManager.updateViewLayout(view,lp);
                         //记录当前坐标作为下一次计算的上一次移动的位置坐标
                         lastX = nowX;
                         lastY = nowY;
@@ -136,6 +141,12 @@ public class OverlayActivity extends AppCompatActivity {
                         break;
                 }
                 return ret;
+            }
+        });//
+        view.findViewById(R.id.tvInfo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtil.toastComptible(getApplicationContext(), v.toString());
             }
         });
     }
