@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Looper;
+import android.os.PowerManager;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -167,6 +168,14 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+
+        ((Button)findViewById(R.id.btnPrivileged)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, PrivilegedActivity.class);
+                startActivity(intent);
+            }
+        });
 
         ((Button)findViewById(R.id.btnExit)).setOnClickListener(new View.OnClickListener() {
             @Override

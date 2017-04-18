@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 
 public class OverlayActivity extends AppCompatActivity {
+    private final static String TAG = "OverlayActivity";
 
     private WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
     private static WindowManager windowManager;
