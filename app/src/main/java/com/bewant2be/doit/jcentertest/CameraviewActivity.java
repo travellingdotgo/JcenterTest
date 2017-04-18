@@ -61,7 +61,7 @@ public class CameraviewActivity extends AppCompatActivity {
         cameraView2 = (CameraView)findViewById(R.id.cameraView2);
         cameraView2.init(CameraView.BACK_CAMERA, display_degree, previewCallback1);
 
-        ToastUtil.toastComptible(mContext, "" + display_degree);
+        ToastUtil.toastComptible(mContext, "display_degree=" + display_degree);
         Log.i(TAG, "display_degree = " + display_degree);
 
         LinearLayout linearLayout = (LinearLayout)findViewById(R.id.ll_surfaces);

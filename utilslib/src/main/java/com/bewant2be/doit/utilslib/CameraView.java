@@ -1,6 +1,8 @@
 package com.bewant2be.doit.utilslib;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.ImageFormat;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -28,8 +30,11 @@ public class CameraView extends SurfaceView {
     public static final int BACK_CAMERA = 0;
     public static final int FRONT_CAMERA = 1;
 
-    public final static int CAMERA_WIDTH = 800;
-    public final static int CAMERA_HEIGHT = 600;
+    public final static int DEFAULT_CAMERA_WIDTH = 800;
+    public final static int DEFAULT_CAMERA_HEIGHT = 600;
+
+    private int mWidth = 0;
+    private int mHeight = 0;
 
     private int mCameraId=-1;
     private int prevWidth,prevHeight;
@@ -77,11 +82,11 @@ public class CameraView extends SurfaceView {
 
         int widthSpec,heightSpec;
         if ( mDisplayDegree % 180==0 ){ // 0 180
-            widthSpec = MeasureSpec.makeMeasureSpec(CAMERA_HEIGHT,mode);
-            heightSpec = MeasureSpec.makeMeasureSpec(CAMERA_WIDTH,mode);
+            widthSpec = MeasureSpec.makeMeasureSpec(mHeight,mode);
+            heightSpec = MeasureSpec.makeMeasureSpec(mWidth,mode);
         }else{              // 90 270
-            widthSpec = MeasureSpec.makeMeasureSpec(CAMERA_WIDTH,mode);
-            heightSpec = MeasureSpec.makeMeasureSpec(CAMERA_HEIGHT,mode);
+            widthSpec = MeasureSpec.makeMeasureSpec(mWidth,mode);
+            heightSpec = MeasureSpec.makeMeasureSpec(mHeight,mode);
         }
 
         super.onMeasure(widthSpec, heightSpec);
@@ -163,13 +168,26 @@ public class CameraView extends SurfaceView {
         Log.i(TAG, "CameraView(Context) ");
 
         initHolder();
+
     }
 
     public CameraView(Context context, AttributeSet attrs) {
         super(context, attrs);
         Log.i(TAG, "CameraView(Context,AttributeSet)");
 
-        initHolder();
+        try {
+            TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CameraView);
+            mWidth = typedArray.getInteger(R.styleable.CameraView_preview_width, DEFAULT_CAMERA_WIDTH);
+            mHeight = typedArray.getInteger(R.styleable.CameraView_preview_height, DEFAULT_CAMERA_HEIGHT);
+            String s = "TypedArray: mWidth="+mWidth + ", mHeight="+mHeight;
+            ToastUtil.toastComptible(getContext(), s);
+            Log.i(TAG, s);
+            initHolder();
+            typedArray.recycle();
+        }
+        catch (Exception e){
+            Log.e(TAG, "Exception: " + e.toString() );
+        }
     }
 
     @Override
@@ -197,9 +215,9 @@ public class CameraView extends SurfaceView {
 
             Log.i(TAG, "mCameraId=" + mCameraId);
             long start = System.currentTimeMillis();
-            initCamera(mCameraId, CAMERA_WIDTH, CAMERA_HEIGHT, previewCallback != null ? previewCallback : null, null);
+            initCamera(mCameraId, DEFAULT_CAMERA_WIDTH, DEFAULT_CAMERA_HEIGHT, previewCallback != null ? previewCallback : null, null);
             long timeMillis = System.currentTimeMillis() - start;
-            ToastUtil.toastComptible(getContext(), "timeMillis: "+timeMillis);
+            //ToastUtil.toastComptible(getContext(), "timeMillis: "+timeMillis);
         }
 
         @Override

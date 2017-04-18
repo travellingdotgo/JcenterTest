@@ -23,6 +23,12 @@ android {
             buildConfigField "Boolean", "DEBUG_MODE", "true"
         }
     }
+
+
+    lintOptions {
+        abortOnError false
+    }
+
 }
 
 dependencies {
