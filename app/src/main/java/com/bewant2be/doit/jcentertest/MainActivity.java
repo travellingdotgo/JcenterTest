@@ -166,6 +166,14 @@ public class MainActivity extends AppCompatActivity{
                 ShellUtil.executeAsRoot("reboot");
             }
         });
+
+
+        ((Button)findViewById(R.id.btnExit)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.exit(0);
+            }
+        });
     }
 
     private void startNetCheck(){
