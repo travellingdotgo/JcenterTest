@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity{
         );
 
         // block the main thread on purpose
-        SystemClock.sleep(1 * 1000);
+        //SystemClock.sleep(1 * 1000);
     }
 
     public void initUi(){

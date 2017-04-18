@@ -49,7 +49,7 @@ public class ToastUtil {
     private static Toast toast = null;
     private static void showToast(Context context, String text) {
         if (toast == null) {
-            toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
+            toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
         } else {
             toast.setText(text);
         }

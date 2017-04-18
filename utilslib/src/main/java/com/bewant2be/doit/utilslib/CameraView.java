@@ -28,8 +28,8 @@ public class CameraView extends SurfaceView {
     public static final int BACK_CAMERA = 0;
     public static final int FRONT_CAMERA = 1;
 
-    public final static int CAMERA_WIDTH = 640;
-    public final static int CAMERA_HEIGHT = 480;
+    public final static int CAMERA_WIDTH = 800;
+    public final static int CAMERA_HEIGHT = 600;
 
     private int mCameraId=-1;
     private int prevWidth,prevHeight;

@@ -9,6 +9,9 @@ import android.widget.LinearLayout;
 
 import com.bewant2be.doit.utilslib.*;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class CameraviewActivity extends AppCompatActivity {
     public final static String TAG = "CameraviewActivity";
 
@@ -18,12 +21,16 @@ public class CameraviewActivity extends AppCompatActivity {
     private boolean verbose = false;
 
     private Context mContext;
-    int display_degree;
+    private int display_degree;
+
+    private int cnt = 0;
+    private Timer timer;
 
     Camera.PreviewCallback previewCallback1 = new Camera.PreviewCallback(){
         @Override
         public void onPreviewFrame(byte[] data, Camera camera) {
-            ToastUtil.toastComptible( getApplicationContext(), "onPreviewFrame Thread: " + Thread.currentThread().getName());
+            cnt ++;
+            //ToastUtil.toastComptible( getApplicationContext(), "onPreviewFrame Thread: " + Thread.currentThread().getName());
             if( debug && verbose ) {
                 Camera.Size size = camera.getParameters().getPreviewSize();
                 Log.d(TAG, "onPreviewFrame getPreviewSize:  " + size.width + "  " + size.height);
@@ -38,6 +45,7 @@ public class CameraviewActivity extends AppCompatActivity {
             camera.addCallbackBuffer(data);
         }
     };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +70,21 @@ public class CameraviewActivity extends AppCompatActivity {
         }else{
             linearLayout.setOrientation(LinearLayout.HORIZONTAL);
         }
+
+        timer = new Timer();
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                Log.i(TAG, "cnt=" + cnt);
+                cnt = 0;
+            }
+        };
+        timer.schedule( timerTask, 1000, 1000);
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        timer.cancel();
+    }
 }
