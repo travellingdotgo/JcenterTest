@@ -1,5 +1,6 @@
 package com.bewant2be.doit.jcentertest;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.net.Uri;
@@ -11,11 +12,15 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.bewant2be.doit.utilslib.ToastUtil;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class OverlayActivity extends AppCompatActivity {
     private final static String TAG = "OverlayActivity";
@@ -71,7 +76,7 @@ public class OverlayActivity extends AppCompatActivity {
     }
 
     private void createFloatView()
-    {
+    {// http://www.aprilwei.com/article/19
         if (imageView != null){
             windowManager.removeView(imageView);
         }
@@ -88,8 +93,8 @@ public class OverlayActivity extends AppCompatActivity {
 
         // FLAG_NOT_TOUCH_MODAL不阻塞事件传递到后面的窗口
         // FLAG_NOT_FOCUSABLE 悬浮窗口较小时，后面的应用图标由不可长按变为可长按,不设置这个flag的话，home页的划屏会有问题
-        lp.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-                |WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL;
+        lp.flags = //WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE; // |
+        WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL;
 
         //悬浮窗默认显示的位置
         lp.gravity = Gravity.LEFT|Gravity.TOP;
@@ -101,7 +106,7 @@ public class OverlayActivity extends AppCompatActivity {
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
         lp.format = PixelFormat.TRANSPARENT;
-        windowManager.addView(view,lp);
+        windowManager.addView(view, lp);
 
         //设置悬浮窗监听事件
         view.setOnTouchListener(new View.OnTouchListener() {
@@ -115,7 +120,7 @@ public class OverlayActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 boolean ret = false;
-                switch (event.getAction()){
+                switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         lastX = event.getRawX();
                         lastY = event.getRawY();
@@ -132,7 +137,7 @@ public class OverlayActivity extends AppCompatActivity {
                         lp.x += tranX;
                         lp.y += tranY;
 
-                        windowManager.updateViewLayout(view,lp);
+                        windowManager.updateViewLayout(view, lp);
                         //记录当前坐标作为下一次计算的上一次移动的位置坐标
                         lastX = nowX;
                         lastY = nowY;
@@ -142,12 +147,25 @@ public class OverlayActivity extends AppCompatActivity {
                 }
                 return ret;
             }
-        });//
+        });
+
         view.findViewById(R.id.tvInfo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtil.toastComptible(getApplicationContext(), v.toString());
+                String s = ((EditText)view.findViewById(R.id.editChat)).getText().toString();
+                ToastUtil.toastComptible(getApplicationContext(), "sending: " + s);
+
+                lp.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL;
+                windowManager.removeView(view);
+                windowManager.addView(view, lp);
+
+                ((EditText)view.findViewById(R.id.editChat)).clearFocus();
             }
         });
+
+        EditText edit = ((EditText)view.findViewById(R.id.editChat));
+        //edit.setFocusable(true);
+        //edit.setFocusableInTouchMode(true);
+        //edit.clearFocus();
     }
 }

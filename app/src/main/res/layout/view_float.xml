@@ -3,20 +3,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@android:color/transparent"
+    android:descendantFocusability="beforeDescendants"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     >
 
     <TextView
         android:id="@+id/tvInfo"
-        android:text="info"
+        android:text="发送"
         android:layout_width="100dp"
-        android:layout_height="200dp" />
-
+        android:layout_height="50dp" />
 
 
     <TextView
         android:id="@+id/tvInfo2"
-        android:text="info"
+        android:text="点此滑动"
         android:layout_width="100dp"
-        android:layout_height="200dp" />
+        android:layout_height="50dp" />
+
+
+    <EditText
+        android:id="@+id/editChat"
+        android:hint="QQ回复"
+        android:editable="true"
+        android:layout_width="100dp"
+        android:layout_height="50dp" />
+    <!--
+    <EditText
+        android:id="@+id/editChat"
+        android:hint="QQ回复"
+        android:editable="true"
+        android:layout_width="100dp"
+        android:layout_height="50dp" />
+         -->
 
 </LinearLayout>
