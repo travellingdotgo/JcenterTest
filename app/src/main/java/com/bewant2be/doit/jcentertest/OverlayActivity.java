@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import com.bewant2be.doit.utilslib.ToastUtil;
+
 import java.util.ArrayList;
 
 public class OverlayActivity extends AppCompatActivity {
@@ -28,10 +30,16 @@ public class OverlayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overlay);
 
+        windowManager = (WindowManager) getApplication().getSystemService(WINDOW_SERVICE);
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            Intent myIntent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
-            startActivity(myIntent);
+            boolean bPermit = Settings.canDrawOverlays(getApplicationContext());
+            if(bPermit){
+                ToastUtil.toastComptible(getApplicationContext(), "canDrawOverlays: "+bPermit);
+                createFloatView();
+            }else {
+                requestPermissions(null);
+            }
         }
     }
 
@@ -39,10 +47,11 @@ public class OverlayActivity extends AppCompatActivity {
 
     public final int REQ_CODE_REQUEST_SETTING = 0;
     public void requestPermissions(ArrayList<String> needPermissions) {
+        //Intent myIntent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+        //startActivity(myIntent);
 
-        Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                Uri.parse("package:" + "com.bewant2be.doit.jcentertest"));
-
+        String packageName = getApplicationContext().getPackageName();
+        Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + packageName)  );
         startActivityForResult(intent, REQ_CODE_REQUEST_SETTING);
     }
 
@@ -51,7 +60,7 @@ public class OverlayActivity extends AppCompatActivity {
 
         switch (requestCode) {
             case REQ_CODE_REQUEST_SETTING:
-
+                ToastUtil.toastComptible(getApplicationContext(), "resultCode: "+resultCode);
                 break;
 
             default:
@@ -62,25 +71,15 @@ public class OverlayActivity extends AppCompatActivity {
 
     private void createFloatView()
     {
-        // 1、获取系统级别的WindowManager
-        windowManager = (WindowManager) getApplication().getSystemService(WINDOW_SERVICE);
-
-        // 判断UI控件是否存在，存在则移除，确保开启任意次应用都只有一个悬浮窗
         if (imageView != null){
             windowManager.removeView(imageView);
         }
-        // 2、使用Application context 创建UI控件，避免Activity销毁导致上下文出现问题
+
         imageView = new ImageView(getApplicationContext());
         imageView.setImageResource(R.mipmap.ic_launcher);
 
-
-        // 3、设置系统级别的悬浮窗的参数，保证悬浮窗悬在手机桌面上
-        // 系统级别需要指定type 属性
         // TYPE_SYSTEM_ALERT 允许接收事件
         // TYPE_SYSTEM_OVERLAY 悬浮在系统上
-        // 注意清单文件添加权限
-
-        //系统提示。它总是出现在应用程序窗口之上。
         lp.type =  WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY;
 
         // FLAG_NOT_TOUCH_MODAL不阻塞事件传递到后面的窗口
@@ -114,22 +113,20 @@ public class OverlayActivity extends AppCompatActivity {
                 boolean ret = false;
                 switch (event.getAction()){
                     case MotionEvent.ACTION_DOWN:
-                        // 获取按下时的X，Y坐标
                         lastX = event.getRawX();
                         lastY = event.getRawY();
                         ret = true;
                         break;
                     case MotionEvent.ACTION_MOVE:
-                        // 获取移动时的X，Y坐标
                         nowX = event.getRawX();
                         nowY = event.getRawY();
-                        // 计算XY坐标偏移量
                         tranX = nowX - lastX;
                         tranY = nowY - lastY;
+
                         // 移动悬浮窗
                         lp.x += tranX;
                         lp.y += tranY;
-                        //更新悬浮窗位置
+
                         windowManager.updateViewLayout(imageView,lp);
                         //记录当前坐标作为下一次计算的上一次移动的位置坐标
                         lastX = nowX;

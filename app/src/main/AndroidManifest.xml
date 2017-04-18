@@ -39,7 +39,16 @@
             android:exported="false" />
 
         <activity android:name=".CameraviewActivity" />
-        <activity android:name=".PrivilegedActivity"></activity>
+        <activity android:name=".PrivilegedActivity" />
+        <activity android:name=".WebentranceActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="myapp" android:host="jp.app" android:pathPrefix="/openwith"/>
+                <!-- <a href="myapp://jp.app/openwith?name=zhangsan&age=26">Laurnch App</a>  -->
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
