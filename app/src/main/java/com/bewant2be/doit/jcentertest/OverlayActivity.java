@@ -166,8 +166,7 @@ public class OverlayActivity extends AppCompatActivity {
         });
 
         EditText edit = ((EditText)view.findViewById(R.id.editChat));
-        String s = NetUtil.getLocalIPAddress();
-        ToastUtil.toastComptible(getApplicationContext(), s);
+        String s = NetUtil.getCurrentNetWorkState(getApplicationContext()) + ": " + NetUtil.getLocalIPAddress();
         edit.setText(s);
         //edit.setFocusable(true);
         //edit.setFocusableInTouchMode(true);

@@ -22,6 +22,8 @@ public class NetUtil {
 
     public final static String TAG = "NetUtil";
 
+    public enum NetState{ NULL,WIFI,ETH }
+
     public static long shellPing(){
         boolean isReachable = false;
         long timeSpend = Long.MAX_VALUE;
@@ -127,6 +129,25 @@ public class NetUtil {
         catch (Exception e){
             return "Exception";
         }
+    }
+
+    public static NetState getCurrentNetWorkState( Context context ){
+        ConnectivityManager mConnManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo mInfo = mConnManager.getActiveNetworkInfo();
+        if(null == mInfo){
+            return NetState.NULL;
+        }
+
+        Log.e(TAG, mInfo.getTypeName());
+
+        if (mInfo.isAvailable() && mInfo.isConnected()&& mInfo.getTypeName().equals("WIFI")){
+            return NetState.WIFI;
+        }
+        else if(mInfo.isAvailable() && mInfo.isConnected()&& mInfo.getTypeName().equals("ETHERNET")){
+            return NetState.ETH;
+        }
+
+        return NetState.NULL;
     }
 
 }
