@@ -16,6 +16,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.bewant2be.doit.utilslib.NetUtil;
+import com.bewant2be.doit.utilslib.ShellUtil;
 import com.bewant2be.doit.utilslib.ToastUtil;
 
 import java.util.ArrayList;
@@ -164,6 +166,9 @@ public class OverlayActivity extends AppCompatActivity {
         });
 
         EditText edit = ((EditText)view.findViewById(R.id.editChat));
+        String s = NetUtil.getLocalIPAddress();
+        ToastUtil.toastComptible(getApplicationContext(), s);
+        edit.setText(s);
         //edit.setFocusable(true);
         //edit.setFocusableInTouchMode(true);
         //edit.clearFocus();

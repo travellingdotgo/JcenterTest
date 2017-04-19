@@ -177,8 +177,8 @@ public class CameraView extends SurfaceView {
 
         try {
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CameraView);
-            mWidth = typedArray.getInteger(R.styleable.CameraView_preview_width, DEFAULT_CAMERA_WIDTH);
-            mHeight = typedArray.getInteger(R.styleable.CameraView_preview_height, DEFAULT_CAMERA_HEIGHT);
+            mWidth = typedArray.getInteger(R.styleable.CameraView_prevwidth, DEFAULT_CAMERA_WIDTH);
+            mHeight = typedArray.getInteger(R.styleable.CameraView_prevheight, DEFAULT_CAMERA_HEIGHT);
             String s = "TypedArray: mWidth="+mWidth + ", mHeight="+mHeight;
             ToastUtil.toastComptible(getContext(), s);
             Log.i(TAG, s);

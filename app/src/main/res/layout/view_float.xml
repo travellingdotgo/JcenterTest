@@ -28,8 +28,8 @@
         android:id="@+id/editChat"
         android:hint="QQ回复"
         android:editable="true"
-        android:layout_width="100dp"
-        android:layout_height="50dp" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <!--
     <EditText
         android:id="@+id/editChat"

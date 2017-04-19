@@ -14,8 +14,8 @@
         android:layout_height="match_parent" >
         <com.bewant2be.doit.utilslib.CameraView
             android:id="@+id/cameraView1"
-            bewant2be:camera_width="1920"
-            bewant2be:camera_height="1080"
+            bewant2be:prevwidth="1920"
+            bewant2be:prevheight="1080"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -27,8 +27,6 @@
         <!--  -->
         <com.bewant2be.doit.utilslib.CameraView
             android:id="@+id/cameraView2"
-            bewant2be:camera_width="1920"
-            bewant2be:camera_height="1080"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
