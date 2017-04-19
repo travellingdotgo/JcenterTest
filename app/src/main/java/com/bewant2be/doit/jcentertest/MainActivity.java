@@ -24,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bewant2be.doit.utilslib.CameraRecord;
+import com.bewant2be.doit.utilslib.DeviceInfo;
 import com.bewant2be.doit.utilslib.DiagnoseUtil;
 import com.bewant2be.doit.utilslib.ShellUtil;
 import com.bewant2be.doit.utilslib.ThreadUtil;
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity{
 
         initUi();
 
-        //startNetCheck();
+        startNetCheck();
     }
 
     @Override
