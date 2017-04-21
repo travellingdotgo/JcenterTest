@@ -33,9 +33,8 @@ public class CameraviewActivity extends AppCompatActivity {
             //ToastUtil.toastComptible( getApplicationContext(), "onPreviewFrame Thread: " + Thread.currentThread().getName());
             if( debug && verbose ) {
                 Camera.Size size = camera.getParameters().getPreviewSize();
-                AbbrLog.d(TAG, "onPreviewFrame getPreviewSize:  " + size.width + "  " + size.height);
                 int format = camera.getParameters().getPreviewFormat();
-                AbbrLog.d(TAG, "onPreviewFrame getPreviewFormat: " + format );
+                AbbrLog.d(TAG, "onPreviewFrame getPreviewSize=" + size.width + "*" + size.height + "  getPreviewFormat="+format);
             }
 
             // add data process here
