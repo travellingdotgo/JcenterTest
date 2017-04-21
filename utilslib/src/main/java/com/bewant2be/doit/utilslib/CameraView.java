@@ -31,8 +31,8 @@ public class CameraView extends SurfaceView {
     public static final int FRONT_CAMERA = 1;
 
 
-    public final static int DEFAULT_RENDER_WIDTH = 960;
-    public final static int DEFAULT_RENDER_HEIGHT = 540;
+    public final static int DEFAULT_RENDER_WIDTH = 480;
+    public final static int DEFAULT_RENDER_HEIGHT = 270;
 
     public final static int DEFAULT_PRIVIEW_WIDTH = 1920;
     public final static int DEFAULT_PRIVIEW_HEIGHT = 1080;
