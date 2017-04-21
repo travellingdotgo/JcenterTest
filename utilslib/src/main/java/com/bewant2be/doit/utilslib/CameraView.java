@@ -30,11 +30,15 @@ public class CameraView extends SurfaceView {
     public static final int BACK_CAMERA = 0;
     public static final int FRONT_CAMERA = 1;
 
-    public final static int DEFAULT_CAMERA_WIDTH = 800;
-    public final static int DEFAULT_CAMERA_HEIGHT = 600;
 
-    private int mWidth = 0;
-    private int mHeight = 0;
+    public final static int DEFAULT_RENDER_WIDTH = 800;
+    public final static int DEFAULT_RENDER_HEIGHT = 600;
+
+    public final static int DEFAULT_PRIVIEW_WIDTH = 1600;
+    public final static int DEFAULT_PRIVIEW_HEIGHT = 1200;
+
+    private int mPreviewWidth = 0;
+    private int mPreviewHeight = 0;
 
     private int mCameraId=-1;
     private int prevWidth,prevHeight;
@@ -65,28 +69,33 @@ public class CameraView extends SurfaceView {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        Log.i(TAG, "onMeasure. mDisplayDegree:  " + mDisplayDegree);
+        String s = "onMeasure. mDisplayDegree:  " + mDisplayDegree + "  ";
         int mode = MeasureSpec.getMode(widthMeasureSpec);
 
         switch (mode) {
             case MeasureSpec.UNSPECIFIED: {
+                Log.i(TAG, s+"MeasureSpec.UNSPECIFIED");
                 break;
             }
             case MeasureSpec.AT_MOST: {
+                Log.i(TAG, s+"MeasureSpec.AT_MOST");
                 break;
             }
             case MeasureSpec.EXACTLY: {
+                Log.i(TAG, s+"MeasureSpec.EXACTLY");
                 break;
             }
+            default:
+                Log.i(TAG, s+"MeasureSpec unkown ");
         }
 
         int widthSpec,heightSpec;
         if ( mDisplayDegree % 180==0 ){ // 0 180
-            widthSpec = MeasureSpec.makeMeasureSpec(mHeight,mode);
-            heightSpec = MeasureSpec.makeMeasureSpec(mWidth,mode);
+            widthSpec = MeasureSpec.makeMeasureSpec(DEFAULT_RENDER_HEIGHT,mode);
+            heightSpec = MeasureSpec.makeMeasureSpec(DEFAULT_RENDER_WIDTH,mode);
         }else{              // 90 270
-            widthSpec = MeasureSpec.makeMeasureSpec(mWidth,mode);
-            heightSpec = MeasureSpec.makeMeasureSpec(mHeight,mode);
+            widthSpec = MeasureSpec.makeMeasureSpec(DEFAULT_RENDER_WIDTH,mode);
+            heightSpec = MeasureSpec.makeMeasureSpec(DEFAULT_RENDER_HEIGHT,mode);
         }
 
         super.onMeasure(widthSpec, heightSpec);
@@ -177,9 +186,9 @@ public class CameraView extends SurfaceView {
 
         try {
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CameraView);
-            mWidth = typedArray.getInteger(R.styleable.CameraView_prevwidth, DEFAULT_CAMERA_WIDTH);
-            mHeight = typedArray.getInteger(R.styleable.CameraView_prevheight, DEFAULT_CAMERA_HEIGHT);
-            String s = "TypedArray: mWidth="+mWidth + ", mHeight="+mHeight;
+            mPreviewWidth = typedArray.getInteger(R.styleable.CameraView_prevwidth, DEFAULT_PRIVIEW_WIDTH);
+            mPreviewHeight = typedArray.getInteger(R.styleable.CameraView_prevheight, DEFAULT_PRIVIEW_HEIGHT);
+            String s = "TypedArray: mPreviewWidth="+mPreviewWidth + ", mPreviewHeight="+mPreviewHeight;
             ToastUtil.toastComptible(getContext(), s);
             Log.i(TAG, s);
             initHolder();
@@ -215,7 +224,7 @@ public class CameraView extends SurfaceView {
 
             Log.i(TAG, "mCameraId=" + mCameraId);
             long start = System.currentTimeMillis();
-            initCamera(mCameraId, DEFAULT_CAMERA_WIDTH, DEFAULT_CAMERA_HEIGHT, previewCallback != null ? previewCallback : null, null);
+            initCamera(mCameraId, DEFAULT_PRIVIEW_WIDTH, DEFAULT_PRIVIEW_HEIGHT, previewCallback != null ? previewCallback : null, null);
             long timeMillis = System.currentTimeMillis() - start;
             //ToastUtil.toastComptible(getContext(), "timeMillis: "+timeMillis);
         }

@@ -18,7 +18,7 @@ public class CameraviewActivity extends AppCompatActivity {
     private  CameraView cameraView1,cameraView2;
 
     private boolean debug = BuildConfig.DEBUG;
-    private boolean verbose = false;
+    private boolean verbose = true;
 
     private Context mContext;
     private int display_degree;
@@ -33,9 +33,9 @@ public class CameraviewActivity extends AppCompatActivity {
             //ToastUtil.toastComptible( getApplicationContext(), "onPreviewFrame Thread: " + Thread.currentThread().getName());
             if( debug && verbose ) {
                 Camera.Size size = camera.getParameters().getPreviewSize();
-                Log.d(TAG, "onPreviewFrame getPreviewSize:  " + size.width + "  " + size.height);
+                AbbrLog.d(TAG, "onPreviewFrame getPreviewSize:  " + size.width + "  " + size.height);
                 int format = camera.getParameters().getPreviewFormat();
-                Log.d(TAG, "onPreviewFrame getPreviewFormat: " + format );
+                AbbrLog.d(TAG, "onPreviewFrame getPreviewFormat: " + format );
             }
 
             // add data process here
@@ -71,15 +71,16 @@ public class CameraviewActivity extends AppCompatActivity {
             linearLayout.setOrientation(LinearLayout.HORIZONTAL);
         }
 
+        final int seconds = 3;
         timer = new Timer();
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                Log.i(TAG, "cnt=" + cnt);
+                Log.i(TAG, "cnt=" + cnt/seconds);
                 cnt = 0;
             }
         };
-        timer.schedule( timerTask, 1000, 1000);
+        timer.schedule( timerTask, seconds*1000, seconds*1000);
     }
 
     @Override
