@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="CameraView">
-        <attr name="prevwidth" format="integer" />
-        <attr name="prevheight" format="integer" />
+        <attr name="previewwidth" format="integer" />
+        <attr name="previewheight" format="integer" />
+        <attr name="displaywidth" format="integer" />
+        <attr name="displayheight" format="integer" />
     </declare-styleable>
 </resources>

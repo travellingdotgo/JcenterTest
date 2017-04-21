@@ -31,17 +31,18 @@ public class CameraView extends SurfaceView {
     public static final int FRONT_CAMERA = 1;
 
 
-    public final static int DEFAULT_RENDER_WIDTH = 480;
-    public final static int DEFAULT_RENDER_HEIGHT = 270;
+    public final static int DEFAULT_DISPLAY_WIDTH = 480;
+    public final static int DEFAULT_DISPLAY_HEIGHT = 270;
 
     public final static int DEFAULT_PRIVIEW_WIDTH = 1920;
     public final static int DEFAULT_PRIVIEW_HEIGHT = 1080;
 
     private int mPreviewWidth = 0;
     private int mPreviewHeight = 0;
+    private int mDisplayWidth = 0;
+    private int mDisplayHeight = 0;
 
     private int mCameraId=-1;
-    private int prevWidth,prevHeight;
 
     private SurfaceHolder holder;
     private Camera camera;
@@ -91,11 +92,11 @@ public class CameraView extends SurfaceView {
 
         int widthSpec,heightSpec;
         if ( mDisplayDegree % 180==0 ){ // 0 180
-            widthSpec = MeasureSpec.makeMeasureSpec(DEFAULT_RENDER_HEIGHT,mode);
-            heightSpec = MeasureSpec.makeMeasureSpec(DEFAULT_RENDER_WIDTH,mode);
+            widthSpec = MeasureSpec.makeMeasureSpec(mDisplayHeight,mode);
+            heightSpec = MeasureSpec.makeMeasureSpec(mDisplayWidth,mode);
         }else{              // 90 270
-            widthSpec = MeasureSpec.makeMeasureSpec(DEFAULT_RENDER_WIDTH,mode);
-            heightSpec = MeasureSpec.makeMeasureSpec(DEFAULT_RENDER_HEIGHT,mode);
+            widthSpec = MeasureSpec.makeMeasureSpec(mDisplayWidth,mode);
+            heightSpec = MeasureSpec.makeMeasureSpec(mDisplayHeight,mode);
         }
 
         super.onMeasure(widthSpec, heightSpec);
@@ -128,8 +129,8 @@ public class CameraView extends SurfaceView {
 
     private void openCamera(int wichCamera, int preview_width,int preview_height, Camera.PreviewCallback _previewCallback )  throws Exception {
         Log.i(TAG, "openCamera ");
-        prevWidth=preview_width;
-        prevHeight=preview_height;
+        mPreviewWidth=preview_width;
+        mPreviewHeight=preview_height;
         previewCallback = _previewCallback;
 
         if (wichCamera>FRONT_CAMERA || wichCamera<BACK_CAMERA){
@@ -161,7 +162,7 @@ public class CameraView extends SurfaceView {
                 }
             }
 
-            parameters.setPreviewSize(prevWidth, prevHeight);
+            parameters.setPreviewSize(mPreviewWidth, mPreviewHeight);
             camera.setParameters(parameters);
         }
 
@@ -186,9 +187,14 @@ public class CameraView extends SurfaceView {
 
         try {
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CameraView);
-            mPreviewWidth = typedArray.getInteger(R.styleable.CameraView_prevwidth, DEFAULT_PRIVIEW_WIDTH);
-            mPreviewHeight = typedArray.getInteger(R.styleable.CameraView_prevheight, DEFAULT_PRIVIEW_HEIGHT);
+            mPreviewWidth = typedArray.getInteger(R.styleable.CameraView_previewwidth, DEFAULT_PRIVIEW_WIDTH);
+            mPreviewHeight = typedArray.getInteger(R.styleable.CameraView_previewheight, DEFAULT_PRIVIEW_HEIGHT);
             String s = "TypedArray: mPreviewWidth="+mPreviewWidth + ", mPreviewHeight="+mPreviewHeight;
+
+            mDisplayWidth = typedArray.getInteger(R.styleable.CameraView_displaywidth, DEFAULT_DISPLAY_WIDTH);
+            mDisplayHeight = typedArray.getInteger(R.styleable.CameraView_displayheight, DEFAULT_DISPLAY_HEIGHT);
+            s += "mDisplayWidth="+mDisplayWidth + ", mDisplayHeight="+mDisplayHeight;
+
             ToastUtil.toastComptible(getContext(), s);
             Log.i(TAG, s);
             initHolder();
@@ -224,7 +230,7 @@ public class CameraView extends SurfaceView {
 
             Log.i(TAG, "mCameraId=" + mCameraId);
             long start = System.currentTimeMillis();
-            initCamera(mCameraId, DEFAULT_PRIVIEW_WIDTH, DEFAULT_PRIVIEW_HEIGHT, previewCallback != null ? previewCallback : null, null);
+            initCamera(mCameraId, mPreviewWidth, mPreviewHeight, previewCallback != null ? previewCallback : null, null);
             long timeMillis = System.currentTimeMillis() - start;
             //ToastUtil.toastComptible(getContext(), "timeMillis: "+timeMillis);
         }
@@ -249,7 +255,7 @@ public class CameraView extends SurfaceView {
                     Log.e(TAG, "getParameters null");
                     return;
                 }
-                int bufferSize = prevWidth*prevHeight * ImageFormat.getBitsPerPixel(parameters.getPreviewFormat()) / 8;
+                int bufferSize = mPreviewWidth*mPreviewHeight * ImageFormat.getBitsPerPixel(parameters.getPreviewFormat()) / 8;
                 camera.addCallbackBuffer(new byte[bufferSize]);
                 Log.i(TAG, "addCallbackBuffer");
                 camera.setPreviewCallbackWithBuffer(previewCallback);

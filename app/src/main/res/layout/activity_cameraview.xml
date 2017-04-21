@@ -6,7 +6,6 @@
     android:layout_height="match_parent" >
 
 
-
     <LinearLayout
         android:id="@+id/ll_surfaces"
         android:orientation="vertical"
@@ -14,8 +13,10 @@
         android:layout_height="match_parent" >
         <com.bewant2be.doit.utilslib.CameraView
             android:id="@+id/cameraView1"
-            bewant2be:prevwidth="960"
-            bewant2be:prevheight="540"
+            bewant2be:previewwidth="1920"
+            bewant2be:previewheight="1080"
+            bewant2be:displaywidth="960"
+            bewant2be:displayheight="540"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -27,8 +28,10 @@
         <!--  -->
         <com.bewant2be.doit.utilslib.CameraView
             android:id="@+id/cameraView2"
-            bewant2be:prevwidth="960"
-            bewant2be:prevheight="540"
+            bewant2be:previewwidth="1920"
+            bewant2be:previewheight="1080"
+            bewant2be:displaywidth="960"
+            bewant2be:displayheight="540"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
