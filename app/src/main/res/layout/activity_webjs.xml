@@ -4,6 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <com.bewant2be.doit.utilslib.view.TitleView
+        android:id="@+id/titleView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </com.bewant2be.doit.utilslib.view.TitleView>
+
     <WebView
         android:id="@+id/webview"
         android:layout_width="match_parent"

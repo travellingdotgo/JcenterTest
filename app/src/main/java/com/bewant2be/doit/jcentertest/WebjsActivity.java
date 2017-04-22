@@ -9,9 +9,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bewant2be.doit.utilslib.ToastUtil;
+import com.bewant2be.doit.utilslib.view.TitleView;
 
 public class WebjsActivity extends AppCompatActivity {
 
+    private TitleView mTitleView;
     private WebView mWebView;
     private TextView logTextView;
 
@@ -32,6 +34,8 @@ public class WebjsActivity extends AppCompatActivity {
             }
         });
 
+        mTitleView = (TitleView)findViewById(R.id.titleView);
+        mTitleView.setLeftButtonText("back");
     }
 
     @android.webkit.JavascriptInterface
