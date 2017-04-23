@@ -178,6 +178,14 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+        ((Button)findViewById(R.id.btnFlingListView)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, FlingListViewActivity.class);
+                startActivity(intent);
+            }
+        });
+
         ((Button)findViewById(R.id.btnExit)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
