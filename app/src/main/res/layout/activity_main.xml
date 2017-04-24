@@ -4,80 +4,86 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-        <TextView
-            android:id="@+id/tv_meg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+    <ScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent" >
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+            <TextView
+                android:id="@+id/tv_meg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-        <Button
-            android:id="@+id/btnCamera"
-            android:text="btnCamera"
-            android:textAllCaps="false"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btnCamera"
+                android:text="btnCamera"
+                android:textAllCaps="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-        <Button
-            android:id="@+id/btnWeb"
-            android:text="btnWeb"
-            android:textAllCaps="false"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btnWeb"
+                android:text="btnWeb"
+                android:textAllCaps="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-        <Button
-            android:id="@+id/btnWebjs"
-            android:text="btnWebjs"
-            android:textAllCaps="false"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <Button
-            android:id="@+id/btnOverlay"
-            android:text="btnOverlays"
-            android:textAllCaps="false"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <Button
-            android:id="@+id/btnRecyclerview"
-            android:text="btnRecyclerview"
-            android:textAllCaps="false"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <Button
-            android:id="@+id/btnCameraview"
-            android:text="btnCameraview"
-            android:textAllCaps="false"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <Button
-            android:id="@+id/btnShellUtil"
-            android:text="btnShellUtil"
-            android:textAllCaps="false"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <Button
-            android:id="@+id/btnPrivileged"
-            android:text="btnPrivileged"
-            android:textAllCaps="false"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btnWebjs"
+                android:text="btnWebjs"
+                android:textAllCaps="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btnOverlay"
+                android:text="btnOverlays"
+                android:textAllCaps="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btnRecyclerview"
+                android:text="btnRecyclerview"
+                android:textAllCaps="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btnCameraview"
+                android:text="btnCameraview"
+                android:textAllCaps="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btnShellUtil"
+                android:text="btnShellUtil"
+                android:textAllCaps="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/btnPrivileged"
+                android:text="btnPrivileged"
+                android:textAllCaps="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btnFlingListView"
+                android:text="btnFlingListView"
+                android:textAllCaps="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btnExit"
+                android:text="btnExit"
+                android:textAllCaps="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
 
-        <Button
-            android:id="@+id/btnFlingListView"
-            android:text="btnFlingListView"
-            android:textAllCaps="false"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        </LinearLayout>
 
-        <Button
-            android:id="@+id/btnExit"
-            android:text="btnExit"
-            android:textAllCaps="false"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>
