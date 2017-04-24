@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Window;
 
 import com.bewant2be.doit.utilslib.view.FlingListView;
+import com.bewant2be.doit.utilslib.view.FlingListView.OnDeleteListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,7 @@ public class FlingListViewActivity extends AppCompatActivity {
 
     private void initViews() {
         flingListView = (FlingListView) findViewById(R.id.flingListView);
-        flingListView.setOnDeleteListener(new FlingListView.OnDeleteListener() {
+        flingListView.setOnDeleteListener(new OnDeleteListener() {
             @Override
             public void onDelete(int index) {
                 contentList.remove(index);

@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 public class StatusUtil {
 
     /** get CPU rate
-     * @return
+     * @return rate
      */
     public static int getProcessCpuRate() {
         StringBuilder tv = new StringBuilder();

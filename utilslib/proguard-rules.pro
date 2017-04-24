@@ -134,30 +134,46 @@
 ####混淆保护自己项目的部分代码以及引用的第三方jar包library-end####
 
 -keep public class **.BuildConfig { *; }
--keep public class **.CameraRecord { *; }
--keep public class **.DeviceInfo { *; }
--keep public class **.DiagnoseUtil { *; }
+
+-keep class com.bewant2be.doit.utilslib.** { * ; }
+
+-keep class com.bewant2be.doit.utilslib.CameraView{
+    public <fields>;
+    public <methods>;
+}
+-keep class com.bewant2be.doit.utilslib.CameraView.OpenCallback{
+    public <fields>;
+    public <methods>;
+}
 
 
--keep public class **.ShellUtil { *; }
--keep public class **.ThreadUtil { *; }
--keep public class **.ToastUtil { *; }
--keep public class **.NetUtil { *; }
--keep public class **.DisplayUtil { *; }
+-keep class com.bewant2be.doit.utilslib.CameraRecord{
+    public <fields>;
+    public <methods>;
+}
+-keep class com.bewant2be.doit.utilslib.CameraRecord.OpenCallback{
+    public <fields>;
+    public <methods>;
+}
 
 
--keep public class **.OpenCallback { *; }
--keep public class **.AbbrLog { *; }
+-keep class com.bewant2be.doit.utilslib.DiagnoseUtil{
+    public <fields>;
+    public <methods>;
+}
+-keep class com.bewant2be.doit.utilslib.DiagnoseUtil.Callback{
+    public <fields>;
+    public <methods>;
+}
 
 
--keep public class **.CameraRecord.OpenCallback { *; }
--keep public class **.OpenCallback { *; }
--keep public class **.FRONT_CAMERA { *; }
--keep public class **.BACK_CAMERA { *; }
--keep public class **.NET_STATUS_DISCONNECTED { *; }
--keep public class **.NET_STATUS_CONNECTED { *; }
+-keep class com.bewant2be.doit.utilslib.view.FlingListView.Callback{
+    public <methods>;
+}
 
--keep public class **.Callback { *; }
+-keep class com.bewant2be.doit.utilslib.service.NetworkMonitorIntentService{
+    public <fields>;
+}
 
 #手动启用support keep注解
 -dontskipnonpubliclibraryclassmembers

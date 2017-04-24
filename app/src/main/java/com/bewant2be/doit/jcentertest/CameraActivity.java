@@ -25,7 +25,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.bewant2be.doit.utilslib.*;
+import com.bewant2be.doit.utilslib.CameraRecord;
+import com.bewant2be.doit.utilslib.CameraRecord.OpenCallback;
+import com.bewant2be.doit.utilslib.ToastUtil;
+import com.bewant2be.doit.utilslib.DisplayUtil;
 import com.bewant2be.doit.utilslib.BuildConfig;
 import com.bewant2be.doit.utilslib.service.NetworkMonitorIntentService;
 
