@@ -151,7 +151,7 @@
     public <fields>;
     public <methods>;
 }
--keep class com.bewant2be.doit.utilslib.CameraRecord.OpenCallback{
+-keep interface com.bewant2be.doit.utilslib.CameraRecord.OpenCallback{
     public <fields>;
     public <methods>;
 }
@@ -161,13 +161,17 @@
     public <fields>;
     public <methods>;
 }
--keep class com.bewant2be.doit.utilslib.DiagnoseUtil.Callback{
+-keep interface com.bewant2be.doit.utilslib.DiagnoseUtil$Callback{
     public <fields>;
     public <methods>;
 }
 
 
--keep class com.bewant2be.doit.utilslib.view.FlingListView.Callback{
+-keep class com.bewant2be.doit.utilslib.DiagnoseUtil$Callback
+-keepattributes InnerClasses
+
+
+-keep interface com.bewant2be.doit.utilslib.view.FlingListView.Callback{
     public <methods>;
 }
 
@@ -182,4 +186,12 @@
 -keep @android.support.annotation.Keep class *
 -keepclassmembers class * {
     @android.support.annotation.Keep *;
+}
+
+
+# Keep annotated by NotProguard
+-keep @com.bewant2be.doit.utilslib.NotProguard class * {*;}
+-keep,allowobfuscation @interface com.bewant2be.doit.utilslib.NotProguard
+-keepclassmembers class * {
+    @com.bewant2be.doit.utilslib.NotProguard *;
 }

@@ -23,6 +23,7 @@ import java.util.concurrent.Semaphore;
 /**
  * Created by user on 4/12/17.
  */
+@NotProguard
 public class CameraView extends SurfaceView {
 
     public final static String TAG = "CameraView";
@@ -56,6 +57,7 @@ public class CameraView extends SurfaceView {
     private Path mPath = new Path();
     private Paint mPaint = new Paint();
 
+    @NotProguard
     public interface OpenCallback{
         public void onCallback(int result);
     }
