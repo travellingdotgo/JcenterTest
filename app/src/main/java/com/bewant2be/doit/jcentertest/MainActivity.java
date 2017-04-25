@@ -25,16 +25,22 @@ import android.widget.Toast;
 
 import com.bewant2be.doit.utilslib.DeviceInfo;
 import com.bewant2be.doit.utilslib.DiagnoseUtil;
+import com.bewant2be.doit.utilslib.PackageUtil;
 import com.bewant2be.doit.utilslib.ShellUtil;
 import com.bewant2be.doit.utilslib.ThreadUtil;
 import com.bewant2be.doit.utilslib.ToastUtil;
 import com.bewant2be.doit.utilslib.service.NetworkMonitorIntentService;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+
+import dalvik.system.DexFile;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -44,7 +50,8 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_main);
+        dynamicBuildViews();
 
         context = getApplicationContext();
 
@@ -58,11 +65,6 @@ public class MainActivity extends AppCompatActivity{
             requestPermissions();
         }
 
-        try{
-            initUi();
-        }catch (Exception e){
-            Log.e(TAG, "initUi: " + e.toString());
-        }
 
         startNetCheck();
     }
@@ -90,107 +92,39 @@ public class MainActivity extends AppCompatActivity{
         //SystemClock.sleep(1 * 1000);
     }
 
-    public void initUi() throws Exception{
+    private void dynamicBuildViews(){
+        LinearLayout linearLayout = new LinearLayout(this);
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
 
-        ((Button)findViewById(R.id.btnWeb)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                    Class cls = Class.forName("WebActivity");
-                    Intent intent = new Intent(MainActivity.this, cls );
-                    startActivity(intent);
-                }catch (Exception e){
-                    Log.e(TAG, e.toString());
+        List<String> classNames = PackageUtil.getClasses(getApplicationContext(), "com.bewant2be.doit.jcentertest");
+        if (classNames != null) {
+            for (final String className : classNames) {
+                if(className.endsWith("Activity")){
+                    int lastDot = className.lastIndexOf(".");
+                    final String singlename = className.substring(lastDot+1, className.length());
+                    Log.i(TAG, singlename);
+                    Button btn = new Button(this);
+                    btn.setText(singlename);
+                    btn.setAllCaps(false);
+                    btn.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+                    btn.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            try {
+                                Class cls = Class.forName(className);
+                                Intent intent = new Intent(getApplicationContext(), cls);
+                                startActivity(intent);
+                            } catch (Exception e) {
+                                Log.e(TAG, e.toString());
+                            }
+                        }
+                    });
+                    linearLayout.addView(btn);
                 }
             }
-        });
+        }
 
-
-        ((Button)findViewById(R.id.btnWebjs)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, WebjsActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
-        ((Button)findViewById(R.id.btnOverlay)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, OverlayActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        ((Button)findViewById(R.id.btnRecyclerview)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, RecyclerviewActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        ((Button)findViewById(R.id.btnCameraview)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CameraviewActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
-        //((Button)findViewById(R.id.btnCameraview)).callOnClick();
-
-        ((Button)findViewById(R.id.btnShellUtil)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean b = ShellUtil.isRooted();
-                ToastUtil.toastComptible(getApplicationContext(), "isRooted: " + b);
-
-                String cmd = "whoami";
-                String result = ShellUtil.execute(cmd);
-                ToastUtil.toastComptible(getApplicationContext(), cmd + "\n- - - - - - - - - -\n" + result);
-
-                cmd = "ls /system/xbin/su";
-                result = ShellUtil.execute(cmd);
-                ToastUtil.toastComptible(getApplicationContext(),  cmd + "\n- - - - - - - - - -\n" + result);
-
-                if(b){
-                    SystemClock.sleep(1000);
-
-                    cmd = "ifconfig eth0 down";
-                    result = ShellUtil.executeAsRootUnstable(cmd);
-                    ToastUtil.toastComptible(getApplicationContext(), cmd + "\n" + result);
-                }
-
-                ShellUtil.executeAsRoot("reboot");
-            }
-        });
-
-
-        ((Button)findViewById(R.id.btnPrivileged)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, PrivilegedActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        ((Button)findViewById(R.id.btnFlingListView)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, FlingListViewActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        ((Button)findViewById(R.id.btnExit)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                System.exit(0);
-            }
-        });
+        setContentView(linearLayout);
     }
 
     private void startNetCheck(){

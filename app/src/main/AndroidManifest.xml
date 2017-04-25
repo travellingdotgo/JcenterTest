@@ -59,7 +59,9 @@
                 <!-- <a href="myapp://jp.app/openwith?name=zhangsan&age=26">Laurnch App</a> -->
             </intent-filter>
         </activity>
-        <activity android:name=".FlingListViewActivity"></activity>
+        <activity android:name=".FlingListViewActivity" />
+        <activity android:name=".RefreshableviewActivity" />
+        <activity android:name=".ShellUtilActivity"></activity>
     </application>
 
 </manifest>
