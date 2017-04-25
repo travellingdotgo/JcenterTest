@@ -137,43 +137,10 @@
 
 -keep class com.bewant2be.doit.utilslib.** { * ; }
 
--keep class com.bewant2be.doit.utilslib.CameraView{
-    public <fields>;
-    public <methods>;
-}
--keep class com.bewant2be.doit.utilslib.CameraView.OpenCallback{
-    public <fields>;
-    public <methods>;
-}
 
+-keep class com.bewant2be.doit.utilslib.DiagnoseUtil$Callback
+-keepattributes InnerClasses
 
--keep class com.bewant2be.doit.utilslib.CameraRecord{
-    public <fields>;
-    public <methods>;
-}
--keep class com.bewant2be.doit.utilslib.CameraRecord.OpenCallback{
-    public <fields>;
-    public <methods>;
-}
-
-
--keep class com.bewant2be.doit.utilslib.DiagnoseUtil{
-    public <fields>;
-    public <methods>;
-}
--keep class com.bewant2be.doit.utilslib.DiagnoseUtil.Callback{
-    public <fields>;
-    public <methods>;
-}
-
-
--keep class com.bewant2be.doit.utilslib.view.FlingListView.Callback{
-    public <methods>;
-}
-
--keep class com.bewant2be.doit.utilslib.service.NetworkMonitorIntentService{
-    public <fields>;
-}
 
 #手动启用support keep注解
 -dontskipnonpubliclibraryclassmembers
@@ -182,4 +149,12 @@
 -keep @android.support.annotation.Keep class *
 -keepclassmembers class * {
     @android.support.annotation.Keep *;
+}
+
+
+# Keep annotated by NotProguard
+-keep @com.bewant2be.doit.utilslib.NotProguard class * {*;}
+-keep,allowobfuscation @interface com.bewant2be.doit.utilslib.NotProguard
+-keepclassmembers class * {
+    @com.bewant2be.doit.utilslib.NotProguard *;
 }
