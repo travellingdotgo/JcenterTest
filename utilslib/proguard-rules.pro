@@ -135,8 +135,7 @@
 
 -keep public class **.BuildConfig { *; }
 
--keep class com.bewant2be.doit.utilslib.** { * ; }
-
+-keep class com.bewant2be.doit.utilslib.** {public <fields>;public <methods>;}
 
 -keep class com.bewant2be.doit.utilslib.DiagnoseUtil$Callback
 -keepattributes InnerClasses
