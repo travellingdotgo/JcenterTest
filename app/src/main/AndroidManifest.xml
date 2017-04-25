@@ -21,7 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CameraActivity" />
         <activity
             android:name=".WebActivity"
             android:screenOrientation="portrait" />
@@ -39,7 +38,6 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-
 
         <service
             android:name="com.bewant2be.doit.utilslib.service.NetworkMonitorIntentService"

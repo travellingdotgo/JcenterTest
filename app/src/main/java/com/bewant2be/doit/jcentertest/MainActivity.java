@@ -23,7 +23,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.bewant2be.doit.utilslib.CameraRecord;
 import com.bewant2be.doit.utilslib.DeviceInfo;
 import com.bewant2be.doit.utilslib.DiagnoseUtil;
 import com.bewant2be.doit.utilslib.ShellUtil;
@@ -88,15 +87,6 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void initUi(){
-        ((Button)findViewById(R.id.btnCamera)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CameraActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        //btnCamera.callOnClick();
 
         ((Button)findViewById(R.id.btnWeb)).setOnClickListener(new View.OnClickListener() {
             @Override
