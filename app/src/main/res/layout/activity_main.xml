@@ -17,13 +17,6 @@
                 android:layout_height="wrap_content" />
 
             <Button
-                android:id="@+id/btnCamera"
-                android:text="btnCamera"
-                android:textAllCaps="false"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <Button
                 android:id="@+id/btnWeb"
                 android:text="btnWeb"
                 android:textAllCaps="false"
