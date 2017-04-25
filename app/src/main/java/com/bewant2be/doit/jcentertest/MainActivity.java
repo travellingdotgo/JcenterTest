@@ -58,7 +58,11 @@ public class MainActivity extends AppCompatActivity{
             requestPermissions();
         }
 
-        initUi();
+        try{
+            initUi();
+        }catch (Exception e){
+            Log.e(TAG, "initUi: " + e.toString());
+        }
 
         startNetCheck();
     }
@@ -86,13 +90,18 @@ public class MainActivity extends AppCompatActivity{
         //SystemClock.sleep(1 * 1000);
     }
 
-    public void initUi(){
+    public void initUi() throws Exception{
 
         ((Button)findViewById(R.id.btnWeb)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, WebActivity.class);
-                startActivity(intent);
+                try{
+                    Class cls = Class.forName("WebActivity");
+                    Intent intent = new Intent(MainActivity.this, cls );
+                    startActivity(intent);
+                }catch (Exception e){
+                    Log.e(TAG, e.toString());
+                }
             }
         });
 
