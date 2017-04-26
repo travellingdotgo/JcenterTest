@@ -21,6 +21,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
+import android.widget.Scroller;
 import android.widget.Toast;
 
 import com.bewant2be.doit.utilslib.DeviceInfo;
@@ -96,6 +98,8 @@ public class MainActivity extends AppCompatActivity{
         LinearLayout linearLayout = new LinearLayout(this);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 
+        ScrollView scrollView = new ScrollView(this);
+
         List<String> classNames = PackageUtil.getClasses(getApplicationContext(), "com.bewant2be.doit.jcentertest");
         if (classNames != null) {
             for (final String className : classNames) {
@@ -119,12 +123,14 @@ public class MainActivity extends AppCompatActivity{
                             }
                         }
                     });
+
                     linearLayout.addView(btn);
                 }
             }
         }
 
-        setContentView(linearLayout);
+        scrollView.addView(linearLayout);
+        setContentView(scrollView);
     }
 
     private void startNetCheck(){
