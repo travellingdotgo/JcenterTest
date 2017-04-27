@@ -29,6 +29,7 @@ import com.bewant2be.doit.utilslib.DeviceInfo;
 import com.bewant2be.doit.utilslib.DiagnoseUtil;
 import com.bewant2be.doit.utilslib.PackageUtil;
 import com.bewant2be.doit.utilslib.ShellUtil;
+import com.bewant2be.doit.utilslib.SystemUtil;
 import com.bewant2be.doit.utilslib.ThreadUtil;
 import com.bewant2be.doit.utilslib.ToastUtil;
 import com.bewant2be.doit.utilslib.service.NetworkMonitorIntentService;
@@ -92,6 +93,8 @@ public class MainActivity extends AppCompatActivity{
 
         // block the main thread on purpose
         //SystemClock.sleep(1 * 1000);
+
+        SystemUtil.getRunningAppProcessInfo(context);
     }
 
     private void dynamicBuildViews(){
@@ -106,8 +109,13 @@ public class MainActivity extends AppCompatActivity{
                 if(className.endsWith("Activity")){
                     int lastDot = className.lastIndexOf(".");
                     final String singlename = className.substring(lastDot+1, className.length());
+                    if ("MainActivity".equals(singlename) ){
+                            continue;
+                    }
+
                     Log.i(TAG, singlename);
                     Button btn = new Button(this);
+                    btn.setId(singlename.hashCode());
                     btn.setText(singlename);
                     btn.setAllCaps(false);
                     btn.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
