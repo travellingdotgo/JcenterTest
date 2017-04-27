@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity{
 
         ScrollView scrollView = new ScrollView(this);
 
-        List<String> classNames = PackageUtil.getClasses(getApplicationContext(), "com.bewant2be.doit.jcentertest");
+        List<String> classNames = PackageUtil.getClasses(getApplicationContext(), getPackageName());
         if (classNames != null) {
             for (final String className : classNames) {
                 if(className.endsWith("Activity")){
