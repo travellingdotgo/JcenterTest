@@ -61,7 +61,8 @@
         </activity>
         <activity android:name=".FlingListViewActivity" />
         <activity android:name=".RefreshableviewActivity" />
-        <activity android:name=".ShellUtilActivity"></activity>
+        <activity android:name=".ShellUtilActivity" />
+        <activity android:name=".TextureviewActivity"></activity>
     </application>
 
 </manifest>
