@@ -45,11 +45,8 @@ public class TextureviewActivity extends AppCompatActivity implements TextureVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_textureview);
-
-        myTexture = new TextureView(this);
+        myTexture = (TextureView)findViewById(R.id.textureView1);
         myTexture.setSurfaceTextureListener(this);
-        setContentView(myTexture);
-        //myTexture.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -64,6 +61,7 @@ public class TextureviewActivity extends AppCompatActivity implements TextureVie
             e.printStackTrace();
             return;
         }
+
         mCamera.startPreview();
         myTexture.setAlpha(0.8f);
         int display_degree = DisplayUtil.getRotation(this);
