@@ -15,6 +15,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
@@ -26,6 +27,7 @@ import android.widget.Scroller;
 import android.widget.Toast;
 
 import com.bewant2be.doit.utilslib.DeviceInfo;
+import com.bewant2be.doit.utilslib.DeviceUtil;
 import com.bewant2be.doit.utilslib.DiagnoseUtil;
 import com.bewant2be.doit.utilslib.PackageUtil;
 import com.bewant2be.doit.utilslib.ShellUtil;
@@ -95,6 +97,10 @@ public class MainActivity extends AppCompatActivity{
         //SystemClock.sleep(1 * 1000);
 
         SystemUtil.getRunningAppProcessInfo(context);
+
+        String s = DeviceUtil.getSerialNumber();
+        ToastUtil.toastComptible(getApplicationContext(), s );
+
     }
 
     private void dynamicBuildViews(){
