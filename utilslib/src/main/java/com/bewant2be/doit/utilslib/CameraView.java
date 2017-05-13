@@ -70,6 +70,11 @@ public class CameraView extends SurfaceView {
         previewCallback = _previewCallback;
     }
 
+    private int mPriority = 0;
+    public void setPriority(int priority){
+        mPriority=priority;
+    }
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         String s = "onMeasure. mDisplayDegree:  " + mDisplayDegree + "  ";
@@ -117,8 +122,13 @@ public class CameraView extends SurfaceView {
             @Override
             public void run() {
                 try {
+                    if(mPriority!=0){
+                        Thread.currentThread().setPriority(mPriority);
+                    }
                     openCamera(cameraId, preview_width, preview_height, _previewCallback);
                     semaphore.release();
+                    int priority = Thread.currentThread().getPriority();
+                    Log.i(TAG, "priority: " + priority);
                 } catch (Exception e) {
                     Log.e(TAG, e.toString());
                 }
