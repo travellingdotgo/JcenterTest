@@ -19,6 +19,7 @@ import android.view.SurfaceView;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.Semaphore;
+import android.os.Process;
 
 /**
  * Created by user on 4/12/17.
@@ -123,11 +124,12 @@ public class CameraView extends SurfaceView {
             public void run() {
                 try {
                     if(mPriority!=0){
-                        Thread.currentThread().setPriority(mPriority);
+                        //Thread.currentThread().setPriority(mPriority);
+                        Process.setThreadPriority(mPriority);
                     }
                     openCamera(cameraId, preview_width, preview_height, _previewCallback);
                     semaphore.release();
-                    int priority = Thread.currentThread().getPriority();
+                    int priority = Process.getThreadPriority((int)Thread.currentThread().getId());
                     Log.i(TAG, "priority: " + priority);
                 } catch (Exception e) {
                     Log.e(TAG, e.toString());
