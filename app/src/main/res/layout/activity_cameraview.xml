@@ -15,8 +15,8 @@
             android:id="@+id/cameraView1"
             bewant2be:previewwidth="1920"
             bewant2be:previewheight="1080"
-            bewant2be:displaywidth="960"
-            bewant2be:displayheight="540"
+            bewant2be:displaywidth="480"
+            bewant2be:displayheight="270"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -30,8 +30,8 @@
             android:id="@+id/cameraView2"
             bewant2be:previewwidth="1920"
             bewant2be:previewheight="1080"
-            bewant2be:displaywidth="960"
-            bewant2be:displayheight="540"
+            bewant2be:displaywidth="480"
+            bewant2be:displayheight="270"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
