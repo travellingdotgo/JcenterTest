@@ -23,13 +23,34 @@ public class CameraviewActivity extends AppCompatActivity {
     private Context mContext;
     private int display_degree;
 
-    private int cnt = 0;
+    private int cnt1 = 0;
+    private int cnt2 = 0;
     private Timer timer;
 
     Camera.PreviewCallback previewCallback1 = new Camera.PreviewCallback(){
         @Override
         public void onPreviewFrame(byte[] data, Camera camera) {
-            cnt ++;
+            cnt1 ++;
+            //ToastUtil.toastComptible( getApplicationContext(), "onPreviewFrame Thread: " + Thread.currentThread().getName());
+            if( debug && verbose ) {
+                Camera.Size size = camera.getParameters().getPreviewSize();
+                int format = camera.getParameters().getPreviewFormat();
+                AbbrLog.d(TAG, "onPreviewFrame getPreviewSize=" + size.width + "*" + size.height + "  getPreviewFormat="+format);
+            }
+
+            // add data process here
+
+
+            // don't delete the code below
+            camera.addCallbackBuffer(data);
+        }
+    };
+
+
+    Camera.PreviewCallback previewCallback2 = new Camera.PreviewCallback(){
+        @Override
+        public void onPreviewFrame(byte[] data, Camera camera) {
+            cnt2 ++;
             //ToastUtil.toastComptible( getApplicationContext(), "onPreviewFrame Thread: " + Thread.currentThread().getName());
             if( debug && verbose ) {
                 Camera.Size size = camera.getParameters().getPreviewSize();
@@ -55,10 +76,10 @@ public class CameraviewActivity extends AppCompatActivity {
         display_degree = DisplayUtil.getRotation(this);
 
         cameraView1 = (CameraView)findViewById(R.id.cameraView1);
-        cameraView1.init(CameraView.FRONT_CAMERA, display_degree, previewCallback1);
+        cameraView1.init(CameraUtil.getFrontCameraId(), display_degree, previewCallback1, 3);
 
         cameraView2 = (CameraView)findViewById(R.id.cameraView2);
-        cameraView2.init(CameraView.BACK_CAMERA, display_degree, previewCallback1);
+        cameraView2.init(CameraUtil.getBackCameraId(), display_degree, previewCallback2, 3);
 
         ToastUtil.toastComptible(mContext, "display_degree=" + display_degree);
         Log.i(TAG, "display_degree = " + display_degree);
@@ -75,8 +96,10 @@ public class CameraviewActivity extends AppCompatActivity {
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                Log.i(TAG, "cnt=" + cnt/seconds);
-                cnt = 0;
+                String s = "fps1=" + cnt1/seconds + ", fps2=" + cnt2/seconds;
+                Log.i(TAG, s);
+                ToastUtil.toastComptible(getApplicationContext(), s);
+                cnt1 = 0;cnt2 = 0;
             }
         };
         timer.schedule( timerTask, seconds*1000, seconds*1000);

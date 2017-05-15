@@ -43,6 +43,7 @@ public class CameraView extends SurfaceView {
     private int mPreviewHeight = 0;
     private int mDisplayWidth = 0;
     private int mDisplayHeight = 0;
+    private int mExtraBuffers = 0;
 
     private int mCameraId=-1;
 
@@ -65,10 +66,11 @@ public class CameraView extends SurfaceView {
 
     HandlerThread handlerThread;
 
-    public void init( int cameraId, int display_degree, Camera.PreviewCallback  _previewCallback ){
+    public void init( int cameraId, int display_degree, Camera.PreviewCallback  _previewCallback, final int extraBuffers ){
         mCameraId = cameraId;
         mDisplayDegree = display_degree;
         previewCallback = _previewCallback;
+        mExtraBuffers = extraBuffers;
     }
 
     private int mPriority = 0;
@@ -112,6 +114,7 @@ public class CameraView extends SurfaceView {
 
     private void initCamera(final int cameraId, final int preview_width, final int preview_height, final Camera.PreviewCallback _previewCallback, final OpenCallback openCallback ) {
         Log.i(TAG, "initCamera ");
+
         final Semaphore semaphore = new Semaphore(1);
         try{ semaphore.acquire(); }catch (Exception e){ }
 
@@ -273,6 +276,10 @@ public class CameraView extends SurfaceView {
                 camera.addCallbackBuffer(new byte[bufferSize]);
                 Log.i(TAG, "addCallbackBuffer");
                 camera.setPreviewCallbackWithBuffer(previewCallback);
+                Log.i(TAG, "mExtraBuffers=" + mExtraBuffers);
+                for (int i=0;i<mExtraBuffers;i++){
+                    camera.addCallbackBuffer(new byte[bufferSize]);
+                }
 
                 camera.startPreview();
                 camera.setPreviewDisplay(holder);
@@ -304,7 +311,7 @@ public class CameraView extends SurfaceView {
                 camera = null;
 
                 handlerThread.quit();
-            }else{
+            } else {
                 Log.i(TAG, "in surfaceDestroyed(), camera==null");
             }
 
