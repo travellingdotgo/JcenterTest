@@ -65,6 +65,7 @@
         <activity android:name=".RefreshableviewActivity" />
         <activity android:name=".ShellUtilActivity" />
         <activity android:name=".TextureviewActivity"></activity>
+        <activity android:name=".WidgetActivity"></activity>
     </application>
 
 </manifest>
