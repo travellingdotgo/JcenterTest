@@ -26,7 +26,7 @@ public class PackageUtil {
      * @param context
      * @return versionCode
      */
-    public String getVersionCode(Context context){
+    public static String getVersionCode(Context context){
         PackageManager packageManager=context.getPackageManager();
         PackageInfo packageInfo;
         String versionCode="";
@@ -44,7 +44,7 @@ public class PackageUtil {
      * @param context
      * @return versionName
      */
-    public String getVersionName(Context context){
+    public static String getVersionName(Context context){
         PackageManager packageManager=context.getPackageManager();
         PackageInfo packageInfo;
         String versionName="";
