@@ -34,4 +34,35 @@ public class SystemUtil {
             }
         }
     }
+
+
+    /*
+        String processName = SystemUtil.getProcessName(getApplicationContext());
+        Log.d(tag, "ProcessName: " + processName);
+        if (MAIN_PROCESS_NAME.equals(processName)) {
+
+        }
+    */
+    public static String getProcessName( Context ctx ){
+        int pid = android.os.Process.myPid();
+        String processName;
+        ActivityManager am = (ActivityManager)ctx.getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningAppProcessInfo appProcess : am.getRunningAppProcesses()){
+            if(appProcess.pid == pid){
+                processName = appProcess.processName;
+                return processName;
+            }
+        }
+
+        return "";
+    }
+
+
+    public static String getSystemVersion(){
+        return "Model=" + android.os.Build.MODEL + " , "
+                +
+                "Android=" + android.os.Build.VERSION.RELEASE +  " , "
+                +
+                "Disp=" + android.os.Build.DISPLAY;
+    }
 }
