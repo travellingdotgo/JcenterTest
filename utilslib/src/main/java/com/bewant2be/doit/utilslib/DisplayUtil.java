@@ -1,6 +1,7 @@
 package com.bewant2be.doit.utilslib;
 
 import android.app.Activity;
+import android.content.Context;
 import android.view.Surface;
 import android.view.WindowManager;
 
@@ -23,5 +24,10 @@ public class DisplayUtil {
         }
 
         return degree;
+    }
+
+    public static int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
     }
 }
