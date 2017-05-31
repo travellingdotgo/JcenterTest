@@ -67,10 +67,7 @@
         <activity android:name=".TextureviewActivity" />
         <activity android:name=".WidgetActivity" />
         <activity android:name=".ImageviewActivity" />
-        <activity
-            android:name=".BiDirSlidingActivity"
-            android:label="@string/title_activity_bi_dir_sliding"
-            android:theme="@style/AppTheme"></activity>
+        <activity android:name=".BiDirSlidingActivity" />
     </application>
 
 </manifest>
