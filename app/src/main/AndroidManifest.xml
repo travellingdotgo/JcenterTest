@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_SMS" />
-    <uses-permission android:name="android.permission.REBOOT" />
+    <!--  <uses-permission android:name="android.permission.REBOOT" /> -->
 
     <application
         android:allowBackup="true"
@@ -19,7 +19,6 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -68,6 +67,8 @@
         <activity android:name=".WidgetActivity" />
         <activity android:name=".ImageviewActivity" />
         <activity android:name=".BiDirSlidingActivity" />
+        <activity android:name=".GridviewActivity" />
+        <activity android:name=".PopupMenuActivity" />
     </application>
 
 </manifest>
