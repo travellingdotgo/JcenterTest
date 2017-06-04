@@ -7,6 +7,8 @@ import android.os.Bundle;
 import com.bewant2be.doit.utilslib.ShellUtil;
 import com.bewant2be.doit.utilslib.ToastUtil;
 
+import java.util.List;
+
 public class ShellUtilActivity extends AppCompatActivity {
 
     @Override
@@ -19,18 +21,19 @@ public class ShellUtilActivity extends AppCompatActivity {
         ToastUtil.toastComptible(getApplicationContext(), "isRooted: " + b);
 
         String cmd = "whoami";
-        String result = ShellUtil.execute(cmd);
-        ToastUtil.toastComptible(getApplicationContext(), cmd + "\n- - - - - - - - - -\n" + result);
+        List<String> listStr = ShellUtil.execute(cmd);
+        ToastUtil.toastComptible(getApplicationContext(), cmd + "\n- - - - - - - - - -\n" + listStr.get(0) + "\n" + listStr.get(1));
 
         cmd = "ls /system/xbin/su";
-        result = ShellUtil.execute(cmd);
-        ToastUtil.toastComptible(getApplicationContext(), cmd + "\n- - - - - - - - - -\n" + result);
+        listStr = ShellUtil.execute(cmd);
+        ToastUtil.toastComptible(getApplicationContext(), cmd + "\n- - - - - - - - - -\n" + listStr.get(0) + "\n" + listStr.get(1));
+
 
         if(b){
             SystemClock.sleep(1000);
 
             cmd = "ifconfig eth0 down";
-            result = ShellUtil.executeAsRootUnstable(cmd);
+            String result = ShellUtil.executeAsRootUnstable(cmd);
             ToastUtil.toastComptible(getApplicationContext(), cmd + "\n" + result);
         }
 

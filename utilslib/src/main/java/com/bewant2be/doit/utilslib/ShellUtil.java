@@ -1,5 +1,6 @@
 package com.bewant2be.doit.utilslib;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -8,6 +9,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.ListIterator;
 
 /**
  * Created by user on 4/4/17.
@@ -16,7 +22,7 @@ import java.io.OutputStream;
 public class ShellUtil {
     private final static String TAG = "ShellUtil";
 
-    public static String execute(String cmd){   // this function blocks sometimes
+    public static List<String> execute(String cmd){   // this function blocks sometimes
         String error_str = "";
         String normal_str = "";
 
@@ -42,7 +48,10 @@ public class ShellUtil {
             return null;
         }
 
-        return "ERROR: " + error_str + "\n" + "RESULT: " + normal_str;
+        List<String> listStr = new LinkedList<String>();
+        listStr.add(error_str);
+        listStr.add(normal_str);
+        return listStr;
     }
 
 
