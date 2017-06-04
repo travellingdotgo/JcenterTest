@@ -22,7 +22,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.Scroller;
 import android.widget.Toast;
 
@@ -35,6 +34,9 @@ import com.bewant2be.doit.utilslib.SystemUtil;
 import com.bewant2be.doit.utilslib.ThreadUtil;
 import com.bewant2be.doit.utilslib.ToastUtil;
 import com.bewant2be.doit.utilslib.service.NetworkMonitorIntentService;
+
+
+import com.bewant2be.doit.utilslib.view.ScrollViewX;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -103,11 +105,14 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
+    ScrollViewX scrollView;
+
     private void dynamicBuildViews(){
         LinearLayout linearLayout = new LinearLayout(this);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 
-        ScrollView scrollView = new ScrollView(this);
+        scrollView = new ScrollViewX(this);
+        scrollView.setOnScrollListener(onScrollListener);
 
         List<String> classNames = PackageUtil.getClasses(getApplicationContext(), getPackageName());
         if (classNames != null) {
@@ -166,4 +171,28 @@ public class MainActivity extends AppCompatActivity{
             Log.i(TAG, "Permission already granted");
         }
     }
+
+    ScrollViewX.OnScrollListener onScrollListener = new ScrollViewX.OnScrollListener(){
+        @Override
+        public void onScrollChanged(int x, int y, int oldX, int oldY) {
+            String s = "x:" + oldX + "->" + x + ", y:" + oldY + "->" + y;
+            ToastUtil.toastComptible(getApplicationContext(), s);
+        }
+
+        @Override
+        public void onScrollStopped() {
+            if ( scrollView.isAtTop()) {
+                ToastUtil.toastComptible(getApplicationContext(), "Stopped at top");
+            } else if (scrollView.isAtBottom()) {
+                ToastUtil.toastComptible(getApplicationContext(), "Stopped at bottom");
+            } else {
+                ToastUtil.toastComptible(getApplicationContext(), "Stopped");
+            }
+        }
+
+        @Override
+        public void onScrolling() {
+
+        }
+    };
 }
