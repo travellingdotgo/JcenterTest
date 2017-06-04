@@ -5,6 +5,7 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Looper;
@@ -20,10 +21,13 @@ import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Scroller;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.view.ViewGroup;
 
 import com.bewant2be.doit.utilslib.DeviceInfo;
 import com.bewant2be.doit.utilslib.DeviceUtil;
@@ -57,7 +61,6 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
         dynamicBuildViews();
 
         context = getApplicationContext();
@@ -106,8 +109,23 @@ public class MainActivity extends AppCompatActivity{
     }
 
     ScrollViewX scrollView;
+    TextView textView;
 
-    private void dynamicBuildViews(){
+    private void dynamicBuildViews(){   // ll_root{  ,scrollView{linearLayout} }
+        LinearLayout ll_root = new LinearLayout(this);
+        ll_root.setOrientation(LinearLayout.VERTICAL);
+
+        // set Title
+        textView = new TextView(this);
+        textView.setText("I am Title");
+        textView.setTextSize(40.00f);
+        textView.setBackgroundColor(Color.YELLOW);
+        textView.setLayoutParams(
+                new ViewGroup.LayoutParams(     ViewGroup.LayoutParams.FILL_PARENT,
+                                                ViewGroup.LayoutParams.WRAP_CONTENT)
+        );
+        ll_root.addView(textView);
+
         LinearLayout linearLayout = new LinearLayout(this);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
 
@@ -149,7 +167,8 @@ public class MainActivity extends AppCompatActivity{
         }
 
         scrollView.addView(linearLayout);
-        setContentView(scrollView);
+        ll_root.addView(scrollView);
+        setContentView(ll_root);
     }
 
     private void startNetCheck(){
@@ -183,10 +202,13 @@ public class MainActivity extends AppCompatActivity{
         public void onScrollStopped() {
             if ( scrollView.isAtTop()) {
                 ToastUtil.toastComptible(getApplicationContext(), "Stopped at top");
+                textView.setVisibility(View.VISIBLE);
             } else if (scrollView.isAtBottom()) {
                 ToastUtil.toastComptible(getApplicationContext(), "Stopped at bottom");
+                textView.setVisibility(View.GONE);
             } else {
                 ToastUtil.toastComptible(getApplicationContext(), "Stopped");
+                textView.setVisibility(View.GONE);
             }
         }
 
