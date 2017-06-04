@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -120,6 +121,7 @@ public class MainActivity extends AppCompatActivity{
         textView.setText("I am Title");
         textView.setTextSize(40.00f);
         textView.setBackgroundColor(Color.YELLOW);
+        textView.setGravity(Gravity.CENTER);
         textView.setLayoutParams(
                 new ViewGroup.LayoutParams(     ViewGroup.LayoutParams.FILL_PARENT,
                                                 ViewGroup.LayoutParams.WRAP_CONTENT)
