@@ -16,6 +16,7 @@ public class VitamioActivity extends AppCompatActivity implements MediaPlayer.On
     private MediaController mMediaController;
     private String PATH_URL1="http://baobab.wdjcdn.com/145076769089714.mp4";
     private String PATH_URL2="http://gslb.miaopai.com/stream/3D~8BM-7CZqjZscVBEYr5g__.mp4";
+    private String PATH_URL3="http://www.modrails.com/videos/passenger_nginx.mov";
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
