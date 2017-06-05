@@ -8,7 +8,7 @@ android {
     defaultConfig {
         applicationId "com.bewant2be.doit.jcentertest"
         minSdkVersion 19
-        targetSdkVersion 23
+        targetSdkVersion 22
         versionCode gitVersionCode()
         versionName gitFullVersionTag()
     }
@@ -44,6 +44,8 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.charonchui.vitamio:vitamio:4.2.2' // only for android sdk less or equal to 22
+
 
 
     releaseCompile project(path: ':utilslib', configuration: 'release')

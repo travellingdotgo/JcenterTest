@@ -8,6 +8,9 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <!-- <uses-permission android:name="android.permission.REBOOT" /> -->
     <application
@@ -70,7 +73,18 @@
         <activity android:name=".BiDirSlidingActivity" />
         <activity android:name=".GridviewActivity" />
         <activity android:name=".PopupMenuActivity" />
-        <activity android:name=".AnimActivity"></activity>
+        <activity android:name=".AnimActivity" />
+        <activity android:name=".VideoViewActivity" />
+
+        <!-- vitamio begin -->
+        <activity android:name=".VitamioActivity" />
+        <activity android:name="io.vov.vitamio.activity.InitActivity"
+            android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <!-- vitamio end -->
+
     </application>
 
 </manifest>
