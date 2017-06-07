@@ -22,6 +22,7 @@ public class VitamioActivity extends AppCompatActivity implements MediaPlayer.On
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 
+        Vitamio.initialize(this);
         if (!io.vov.vitamio.LibsChecker.checkVitamioLibs(this)){
             ToastUtil.toastComptible(getApplication(), "checkVitamioLibs failed" );
             return;
