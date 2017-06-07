@@ -50,4 +50,6 @@ dependencies {
 
     releaseCompile project(path: ':utilslib', configuration: 'release')
     debugCompile project(path: ':utilslib', configuration: 'debug')
+
+    //compile project(':utilslib')
 }
