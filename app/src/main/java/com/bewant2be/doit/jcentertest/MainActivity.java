@@ -118,8 +118,8 @@ public class MainActivity extends AppCompatActivity{
 
         // set Title
         textView = new TextView(this);
-        textView.setText("I am Title");
-        textView.setTextSize(40.00f);
+        textView.setText("Ver: " + PackageUtil.getVersionName(getApplicationContext()));
+        textView.setTextSize(20.00f);
         textView.setBackgroundColor(Color.YELLOW);
         textView.setGravity(Gravity.CENTER);
         textView.setLayoutParams(
