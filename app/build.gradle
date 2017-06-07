@@ -10,7 +10,7 @@ android {
         minSdkVersion 19
         targetSdkVersion 22
         versionCode gitVersionCode()
-        versionName gitFullVersionTag()
+        versionName gitFullVersionTag() + ". assembledOn=" + timeStamp()
     }
 
     buildTypes {
