@@ -224,6 +224,12 @@ public class MainActivity extends AppCompatActivity{
         }
     };
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mTimerHeader.cancel();
+    }
+
     int header_height = 0;
     boolean bTop = true;
     final static int HEADER_MAX_HEIGHT = 180;
@@ -260,4 +266,6 @@ public class MainActivity extends AppCompatActivity{
             }
         });
     }
+
+
 }
