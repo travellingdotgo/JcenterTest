@@ -51,6 +51,8 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import dalvik.system.DexFile;
 
@@ -122,11 +124,12 @@ public class MainActivity extends AppCompatActivity{
         textView.setTextSize(20.00f);
         textView.setBackgroundColor(Color.YELLOW);
         textView.setGravity(Gravity.CENTER);
-        textView.setLayoutParams(
-                new ViewGroup.LayoutParams(     ViewGroup.LayoutParams.FILL_PARENT,
-                                                ViewGroup.LayoutParams.WRAP_CONTENT)
-        );
+        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(     ViewGroup.LayoutParams.FILL_PARENT,
+                                                ViewGroup.LayoutParams.WRAP_CONTENT );
+        textView.setLayoutParams(layoutParams);
         ll_root.addView(textView);
+
+        mTimerHeader.schedule(timerTask,10,10);
 
         LinearLayout linearLayout = new LinearLayout(this);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
@@ -203,14 +206,15 @@ public class MainActivity extends AppCompatActivity{
         @Override
         public void onScrollStopped() {
             if ( scrollView.isAtTop()) {
+                bTop = true;
                 ToastUtil.toastComptible(getApplicationContext(), "Stopped at top");
-                textView.setVisibility(View.VISIBLE);
-            } else if (scrollView.isAtBottom()) {
-                ToastUtil.toastComptible(getApplicationContext(), "Stopped at bottom");
-                textView.setVisibility(View.GONE);
-            } else {
-                ToastUtil.toastComptible(getApplicationContext(), "Stopped");
-                textView.setVisibility(View.GONE);
+            }else{
+                bTop = false;
+                if (scrollView.isAtBottom()) {
+                    ToastUtil.toastComptible(getApplicationContext(), "Stopped at bottom");
+                } else {
+                    ToastUtil.toastComptible(getApplicationContext(), "Stopped");
+                }
             }
         }
 
@@ -219,4 +223,41 @@ public class MainActivity extends AppCompatActivity{
 
         }
     };
+
+    int header_height = 0;
+    boolean bTop = true;
+    final static int HEADER_MAX_HEIGHT = 180;
+    final static int HEADER_STEP_HEIGHT = 4;
+
+
+    Timer mTimerHeader = new Timer();
+    TimerTask timerTask = new TimerTask() {
+        @Override
+        public void run() {
+            if(bTop){ // if onTop, increase
+                if (header_height < HEADER_MAX_HEIGHT) {
+                    header_height+=HEADER_STEP_HEIGHT;
+                    setHeaderHeight(header_height);
+                    Log.e(TAG, "+ setHeaderHeight " + header_height);
+                }
+            }else{ // decrease
+                if (header_height > 0) {
+                    header_height-=HEADER_STEP_HEIGHT;
+                    setHeaderHeight(header_height);
+                    Log.e(TAG, "- setHeaderHeight " + header_height);
+                }
+            }
+        }
+    };
+
+    private void setHeaderHeight(final int height){
+        textView.post(new Runnable() {
+            @Override
+            public void run() {
+                    ViewGroup.LayoutParams layoutParams = textView.getLayoutParams();
+                    layoutParams.height = height;
+                    textView.setLayoutParams(layoutParams);
+            }
+        });
+    }
 }
