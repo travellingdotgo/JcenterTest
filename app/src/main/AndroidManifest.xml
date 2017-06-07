@@ -78,13 +78,15 @@
 
         <!-- vitamio begin -->
         <activity android:name=".VitamioActivity" />
-        <activity android:name="io.vov.vitamio.activity.InitActivity"
+        <activity
+            android:name="io.vov.vitamio.activity.InitActivity"
             android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.NoTitleBar"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <!-- vitamio end -->
 
+        <activity android:name=".WaterflowActivity" />
     </application>
 
 </manifest>
