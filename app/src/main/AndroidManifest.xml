@@ -87,6 +87,7 @@
         <!-- vitamio end -->
 
         <activity android:name=".WaterflowActivity" />
+        <activity android:name=".CardviewActivity" />
     </application>
 
 </manifest>
