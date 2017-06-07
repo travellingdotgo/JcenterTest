@@ -244,13 +244,13 @@ public class MainActivity extends AppCompatActivity{
                 if (header_height < HEADER_MAX_HEIGHT) {
                     header_height+=HEADER_STEP_HEIGHT;
                     setHeaderHeight(header_height);
-                    Log.e(TAG, "+ setHeaderHeight " + header_height);
+                    Log.d(TAG, "+ setHeaderHeight " + header_height);
                 }
             }else{ // decrease
                 if (header_height > 0) {
                     header_height-=HEADER_STEP_HEIGHT;
                     setHeaderHeight(header_height);
-                    Log.e(TAG, "- setHeaderHeight " + header_height);
+                    Log.d(TAG, "- setHeaderHeight " + header_height);
                 }
             }
         }
