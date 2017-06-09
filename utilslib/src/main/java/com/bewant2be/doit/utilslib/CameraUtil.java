@@ -28,6 +28,17 @@ public class CameraUtil {
 
     }
 
+    public static void listCameras(){
+            Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
+            final int numberOfCameras = Camera.getNumberOfCameras();
+            Log.i(TAG, "CAMERA numberOfCameras=" + numberOfCameras);
+
+            for (int i = 0; i < numberOfCameras; ++i) {
+                Camera.getCameraInfo(i, cameraInfo);
+                Log.i(TAG, "cameraInfo.facing:  " + cameraInfo.facing);
+                Log.i(TAG, "cameraInfo.orientation:  " + cameraInfo.orientation);
+            }
+    }
 
     public static int getBackCameraId() {
         Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
