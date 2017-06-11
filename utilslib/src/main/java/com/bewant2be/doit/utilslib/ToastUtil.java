@@ -50,6 +50,10 @@ public class ToastUtil {
     // - - - - - - - -- - - -- - - - - - -- - - - -- - - - - - -- - - - --
 
     private void toast( final Context applicationCtx, final String msg ){
+        if(handler==null){
+            Log.e(TAG, "handler==null");
+            return;
+        }
         handler.post(new Runnable() {
             @Override
             public void run() {
@@ -59,6 +63,10 @@ public class ToastUtil {
     }
 
     private void toastview( final Context applicationCtx, final String msg ){
+        if(handler==null){
+            Log.e(TAG, "handler==null");
+            return;
+        }
         handler.post(new Runnable() {
             @Override
             public void run() {

@@ -71,7 +71,7 @@
         <activity android:name=".WidgetActivity" />
         <activity android:name=".ImageviewActivity" />
         <activity android:name=".BiDirSlidingActivity" />
-        <activity android:name=".GridviewActivity" />
+        <activity android:name=".gridview.GridviewActivity" />
         <activity android:name=".PopupMenuActivity" />
         <activity android:name=".AnimActivity" />
         <activity android:name=".VideoViewActivity" />
@@ -86,9 +86,10 @@
             android:windowSoftInputMode="stateAlwaysHidden" />
         <!-- vitamio end -->
 
-        <activity android:name=".WaterflowActivity" />
+        <activity android:name=".waterflow.WaterflowActivity" />
         <activity android:name=".CardviewActivity" />
         <activity android:name=".MiscActivity" />
+        <activity android:name=".sqlite.SqliteActivity"></activity>
     </application>
 
 </manifest>

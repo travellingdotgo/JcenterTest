@@ -47,7 +47,18 @@ dependencies {
     compile 'com.charonchui.vitamio:vitamio:4.2.2' // only for android sdk less or equal to 22
 
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.3' // only for cardview demo
+    compile 'com.jakewharton:butterknife:7.0.1' // sample in AnimActivity.java
+    compile 'com.amitshekhar.android:jackson-android-networking:1.0.0' // MiscActivity
 
+    // for test begin
+    compile 'io.reactivex:rxjava:1.0.14'
+    compile 'io.reactivex:rxandroid:1.0.1'
+    compile 'com.jakewharton.rxbinding:rxbinding:0.4.0'
+    compile 'com.jakewharton.rxbinding:rxbinding-support-v4:0.4.0'
+    // for test end
+
+    // webRtc
+    compile 'io.pristine:libjingle:11139@aar'
 
     releaseCompile project(path: ':utilslib', configuration: 'release')
     debugCompile project(path: ':utilslib', configuration: 'debug')

@@ -1,4 +1,4 @@
-package com.bewant2be.doit.jcentertest;
+package com.bewant2be.doit.jcentertest.waterflow;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.bewant2be.doit.jcentertest.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,14 +74,5 @@ public class WaterflowRecyclerAdapter extends RecyclerView.Adapter<WaterflowView
     @Override
     public int getItemCount() {
         return lists.size();
-    }
-}
-
-class WaterflowViewHolder extends RecyclerView.ViewHolder{
-    TextView mTv;
-
-    public WaterflowViewHolder(View itemView) {
-        super(itemView);
-        mTv = (TextView) itemView.findViewById(R.id.textView);
     }
 }
