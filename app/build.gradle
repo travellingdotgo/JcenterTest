@@ -47,6 +47,8 @@ dependencies {
     compile 'com.charonchui.vitamio:vitamio:4.2.2' // only for android sdk less or equal to 22
 
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.3' // only for cardview demo
+    compile 'com.jakewharton:butterknife:7.0.1' // sample in AnimActivity.java
+
 
 
     releaseCompile project(path: ':utilslib', configuration: 'release')
