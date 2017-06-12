@@ -64,7 +64,8 @@ public class PackageUtil {
         try {
             String packageCodePath = mContext.getPackageCodePath();
             DexFile df = new DexFile(packageCodePath);
-            String regExp = "^" + packageName + ".\\w+$";
+            //String regExp = "^" + packageName + ".\\w+$";
+            String regExp = "^" + packageName + ".\\w+" + ".\\w+" + "$";
             for (Enumeration iter = df.entries(); iter.hasMoreElements(); ) {
                 String className = (String)iter.nextElement();
                 if (className.matches(regExp)) {

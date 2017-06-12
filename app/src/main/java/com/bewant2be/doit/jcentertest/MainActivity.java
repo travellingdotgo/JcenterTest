@@ -109,6 +109,11 @@ public class MainActivity extends AppCompatActivity{
         String s = DeviceUtil.getSerialNumber();
         ToastUtil.toastComptible(getApplicationContext(), s );
 
+        // for debug
+        if(false) {
+            Intent intent = new Intent(getApplicationContext(), SqliteActivity.class);
+            startActivity(intent);
+        }
     }
 
     ScrollViewX scrollView;
