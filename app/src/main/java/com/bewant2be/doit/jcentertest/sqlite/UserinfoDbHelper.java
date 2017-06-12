@@ -4,30 +4,30 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.bewant2be.doit.jcentertest.sqlite.FeedReaderContract.FeedEntry;
+import com.bewant2be.doit.jcentertest.sqlite.UserInfo.UserEntry;
 
 /**
  * Created by user on 6/12/17.
  */
-public class FeedReaderDbHelper extends SQLiteOpenHelper {
-
-    private static final String SQL_CREATE_ENTRIES =
-            "CREATE TABLE " + FeedEntry.TABLE_NAME + " (" +
-                    FeedEntry._ID + " INTEGER PRIMARY KEY," +
-                    FeedEntry.COLUMN_NAME_TITLE + " TEXT," +
-                    FeedEntry.COLUMN_NAME_SUBTITLE + " TEXT," +
-                    FeedEntry.COLUMN_NAME_BINARY_FEATURE + " BLOB," +
-                    FeedEntry.COLUMN_NAME_BINARY_IMG + " BLOB)";
-
-    private static final String SQL_DELETE_ENTRIES =
-            "DROP TABLE IF EXISTS " + FeedEntry.TABLE_NAME;
-
+public class UserinfoDbHelper extends SQLiteOpenHelper {
 
     // If you change the database schema, you must increment the database version.
     public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "FeedReader.db";
+    public static final String DATABASE_NAME = "userinfo.db";
 
-    public FeedReaderDbHelper(Context context) {
+    private static final String SQL_CREATE_ENTRIES =
+            "CREATE TABLE " + UserEntry.TABLE_NAME + " (" +
+                    UserEntry._ID + " INTEGER PRIMARY KEY," +
+                    UserEntry.COLUMN_NAME_TITLE + " TEXT," +
+                    UserEntry.COLUMN_NAME_SUBTITLE + " TEXT," +
+                    UserEntry.COLUMN_NAME_BINARY_FEATURE + " BLOB," +
+                    UserEntry.COLUMN_NAME_BINARY_IMG + " BLOB)";
+
+    private static final String SQL_DELETE_ENTRIES =
+            "DROP TABLE IF EXISTS " + UserEntry.TABLE_NAME;
+
+
+    public UserinfoDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
