@@ -1,4 +1,4 @@
-package com.bewant2be.doit.jcentertest;
+package com.bewant2be.doit.jcentertest.sqlite;
 
 import android.provider.BaseColumns;
 

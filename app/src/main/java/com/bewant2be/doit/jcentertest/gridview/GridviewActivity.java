@@ -1,8 +1,10 @@
-package com.bewant2be.doit.jcentertest;
+package com.bewant2be.doit.jcentertest.gridview;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.GridView;
+
+import com.bewant2be.doit.jcentertest.R;
 
 import java.util.ArrayList;
 

@@ -6,35 +6,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.hardware.Camera;
 import android.os.Build;
-import android.os.Looper;
-import android.os.PowerManager;
-import android.os.SystemClock;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.Scroller;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.view.ViewGroup;
 
-import com.bewant2be.doit.utilslib.DeviceInfo;
+import com.bewant2be.doit.jcentertest.sqlite.SqliteActivity;
 import com.bewant2be.doit.utilslib.DeviceUtil;
 import com.bewant2be.doit.utilslib.DiagnoseUtil;
 import com.bewant2be.doit.utilslib.PackageUtil;
-import com.bewant2be.doit.utilslib.ShellUtil;
 import com.bewant2be.doit.utilslib.SystemUtil;
 import com.bewant2be.doit.utilslib.ThreadUtil;
 import com.bewant2be.doit.utilslib.ToastUtil;
@@ -43,18 +30,9 @@ import com.bewant2be.doit.utilslib.service.NetworkMonitorIntentService;
 
 import com.bewant2be.doit.utilslib.view.ScrollViewX;
 
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Enumeration;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import dalvik.system.DexFile;
 
 public class MainActivity extends AppCompatActivity{
 

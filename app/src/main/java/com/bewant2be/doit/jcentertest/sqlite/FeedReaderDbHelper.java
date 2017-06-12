@@ -1,10 +1,10 @@
-package com.bewant2be.doit.jcentertest;
+package com.bewant2be.doit.jcentertest.sqlite;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.bewant2be.doit.jcentertest.FeedReaderContract.FeedEntry;
+import com.bewant2be.doit.jcentertest.sqlite.FeedReaderContract.FeedEntry;
 
 /**
  * Created by user on 6/12/17.

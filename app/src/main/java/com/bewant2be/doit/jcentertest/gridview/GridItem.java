@@ -1,4 +1,4 @@
-package com.bewant2be.doit.jcentertest;
+package com.bewant2be.doit.jcentertest.gridview;
 
 /**
  * Created by user on 6/2/17.

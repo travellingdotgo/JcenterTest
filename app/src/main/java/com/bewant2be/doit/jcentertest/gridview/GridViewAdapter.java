@@ -1,4 +1,4 @@
-package com.bewant2be.doit.jcentertest;
+package com.bewant2be.doit.jcentertest.gridview;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bewant2be.doit.jcentertest.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
