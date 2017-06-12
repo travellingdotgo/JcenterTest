@@ -1,4 +1,4 @@
-package com.bewant2be.doit.jcentertest;
+package com.bewant2be.doit.jcentertest.waterflow;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.Toast;
+
+import com.bewant2be.doit.jcentertest.R;
 
 import java.util.ArrayList;
 import java.util.List;

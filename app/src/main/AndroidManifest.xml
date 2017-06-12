@@ -86,7 +86,7 @@
             android:windowSoftInputMode="stateAlwaysHidden" />
         <!-- vitamio end -->
 
-        <activity android:name=".WaterflowActivity" />
+        <activity android:name=".waterflow.WaterflowActivity" />
         <activity android:name=".CardviewActivity" />
         <activity android:name=".MiscActivity" />
         <activity android:name=".sqlite.SqliteActivity"></activity>
