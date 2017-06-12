@@ -15,7 +15,9 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
             "CREATE TABLE " + FeedEntry.TABLE_NAME + " (" +
                     FeedEntry._ID + " INTEGER PRIMARY KEY," +
                     FeedEntry.COLUMN_NAME_TITLE + " TEXT," +
-                    FeedEntry.COLUMN_NAME_SUBTITLE + " TEXT)";
+                    FeedEntry.COLUMN_NAME_SUBTITLE + " TEXT," +
+                    FeedEntry.COLUMN_NAME_BINARY_FEATURE + " BLOB," +
+                    FeedEntry.COLUMN_NAME_BINARY_IMG + " BLOB)";
 
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + FeedEntry.TABLE_NAME;
@@ -30,6 +32,7 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
     }
 
     public void onCreate(SQLiteDatabase db) {
+        db.execSQL(SQL_DELETE_ENTRIES);
         db.execSQL(SQL_CREATE_ENTRIES);
     }
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

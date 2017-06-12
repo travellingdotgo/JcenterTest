@@ -32,8 +32,14 @@ public class SqliteActivity extends AppCompatActivity {
         super.onPostResume();
 
         long id = System.currentTimeMillis();
-        insert( "title."+id, "subtitle."+id );
-        insert( "title.", "subtitle."+id );
+
+        /*
+        byte[] feature = new byte[]{0x01,0x02};
+        byte[] image = new byte[]{0x03,0x04};
+
+        insert( "title."+id, "subtitle."+id, feature,image );
+        insert("title.", "subtitle." + id, feature, image);
+        */
 
         query();
 
@@ -48,7 +54,7 @@ public class SqliteActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    private void insert( String title, String subtitle ){
+    private void insert( String title, String subtitle, byte[] feature, byte[] image ){
         // Gets the data repository in write mode
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
@@ -56,6 +62,9 @@ public class SqliteActivity extends AppCompatActivity {
         ContentValues values = new ContentValues();
         values.put(FeedEntry.COLUMN_NAME_TITLE, title);
         values.put(FeedEntry.COLUMN_NAME_SUBTITLE, subtitle);
+
+        values.put(FeedEntry.COLUMN_NAME_BINARY_FEATURE, feature);
+        values.put(FeedEntry.COLUMN_NAME_BINARY_IMG, image);
 
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(FeedEntry.TABLE_NAME, null, values);
@@ -66,7 +75,7 @@ public class SqliteActivity extends AppCompatActivity {
 
     private void queryAll(){
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
-        String sql = "SELECT _id,title,subtitle FROM "+FeedEntry.TABLE_NAME;
+        String sql = "SELECT _id,title,subtitle,feature,image FROM "+FeedEntry.TABLE_NAME;
         Cursor cursor = db.rawQuery(sql, null);
         if(cursor.moveToFirst()){
             do{
@@ -74,9 +83,12 @@ public class SqliteActivity extends AppCompatActivity {
                 String column1 = cursor.getString(0);
                 String column2 = cursor.getString(1);
                 String column3 = cursor.getString(2);
+                byte[] feature = cursor.getBlob(3);
+                byte[] image = cursor.getBlob(4);
 
                 //Do something Here with values
-                Log.w(TAG, "column1="+column1+", column2="+column2+ ", column3="+column3);
+                Log.w(TAG, "column1="+column1+", column2="+column2+ ", column3="+column3
+                        + ", feature="+feature[0] + ", image="+image[0]);
             }while(cursor.moveToNext());
         }
 
@@ -92,7 +104,9 @@ public class SqliteActivity extends AppCompatActivity {
         String[] projection = {
                 FeedEntry._ID,
                 FeedEntry.COLUMN_NAME_TITLE,
-                FeedEntry.COLUMN_NAME_SUBTITLE
+                FeedEntry.COLUMN_NAME_SUBTITLE,
+                FeedEntry.COLUMN_NAME_BINARY_FEATURE,
+                FeedEntry.COLUMN_NAME_BINARY_IMG
         };
 
         // Filter results WHERE "title" = 'My Title'
@@ -127,46 +141,4 @@ public class SqliteActivity extends AppCompatActivity {
 
         cursor.close();
     }
-
-
-
-    /*
-    private void load(){
-        List itemIds = new ArrayList<>();
-        while(cursor.moveToNext()) {
-            long itemId = cursor.getLong(
-                    cursor.getColumnIndexOrThrow(FeedEntry._ID));
-            itemIds.add(itemId);
-        }
-        cursor.close();
-    }
-
-    private void delete(){
-// Define 'where' part of query.
-        String selection = FeedEntry.COLUMN_NAME_TITLE + " LIKE ?";
-// Specify arguments in placeholder order.
-        String[] selectionArgs = { "MyTitle" };
-// Issue SQL statement.
-        db.delete(FeedEntry.TABLE_NAME, selection, selectionArgs);
-    }
-
-
-    private void update( String title ){
-        SQLiteDatabase db = mDbHelper.getReadableDatabase();
-
-// New value for one column
-        ContentValues values = new ContentValues();
-        values.put(FeedEntry.COLUMN_NAME_TITLE, title);
-
-// Which row to update, based on the title
-        String selection = FeedEntry.COLUMN_NAME_TITLE + " LIKE ?";
-        String[] selectionArgs = { "MyTitle" };
-
-        int count = db.update(
-                FeedReaderDbHelper.FeedEntry.TABLE_NAME,
-                values,
-                selection,
-                selectionArgs);
-    }
-    */
 }

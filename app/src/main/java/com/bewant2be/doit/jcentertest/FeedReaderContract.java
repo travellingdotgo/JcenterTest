@@ -15,5 +15,7 @@ public final class FeedReaderContract {
         public static final String TABLE_NAME = "entry";
         public static final String COLUMN_NAME_TITLE = "title";
         public static final String COLUMN_NAME_SUBTITLE = "subtitle";
+        public static final String COLUMN_NAME_BINARY_FEATURE = "feature";
+        public static final String COLUMN_NAME_BINARY_IMG = "image";
     }
 }
