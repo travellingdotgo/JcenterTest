@@ -9,6 +9,9 @@ import android.util.Log;
 
 import com.bewant2be.doit.jcentertest.sqlite.UserInfoEntry.UserEntry;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by user on 6/12/17.
  */
@@ -17,7 +20,7 @@ public class UserinfoDbHelper extends SQLiteOpenHelper {
 
     // If you change the database schema, you must increment the database version.
     public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "userinfo.db";
+    public static final String DATABASE_NAME = "userinfo2.db";
 
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + UserEntry.TABLE_NAME + " (" +
@@ -35,7 +38,7 @@ public class UserinfoDbHelper extends SQLiteOpenHelper {
     }
 
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(SQL_DELETE_ENTRIES);
+        //db.execSQL(SQL_DELETE_ENTRIES);
         db.execSQL(SQL_CREATE_ENTRIES);
     }
 
@@ -89,6 +92,38 @@ public class UserinfoDbHelper extends SQLiteOpenHelper {
 
         cursor.close();
         db.close();
+    }
+
+
+    public List<UserInfo> loadAll(){
+        List<UserInfo> list = new ArrayList<UserInfo>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "SELECT _id,user,time,feature,image FROM "+UserEntry.TABLE_NAME;
+        Cursor cursor = db.rawQuery(sql, null);
+        if(cursor.moveToFirst()){
+            do{
+                //assing values
+                String _id = cursor.getString(0);
+                String user = cursor.getString(1);
+                String time = cursor.getString(2);
+                byte[] feature = cursor.getBlob(3);
+                byte[] image = cursor.getBlob(4);
+
+                //Do something Here with values
+                Log.w(TAG, "_id="+_id+", user="+user+ ", time="+time
+                        + ", feature="+feature[0] + ", image="+image[0]);
+
+                list.add(new UserInfo(user,time,feature,image));
+            }while(cursor.moveToNext());
+        }
+
+        Log.i(TAG, "list.size=" + list.size());
+
+        cursor.close();
+        db.close();
+
+        return list;
     }
 
     public void query(){
