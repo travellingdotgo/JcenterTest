@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity{
 
         // for debug
         if(false) {
-            Intent intent = new Intent(getApplicationContext(), SqliteActivity.class);
+            Intent intent = new Intent(getApplicationContext(), MiscActivity.class);
             startActivity(intent);
         }
     }

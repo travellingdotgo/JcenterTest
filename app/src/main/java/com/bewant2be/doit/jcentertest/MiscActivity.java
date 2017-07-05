@@ -23,6 +23,15 @@ public class MiscActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_misc);
+
+
+        ClassLoader classLoader = getClassLoader();
+        if (classLoader != null){
+            while (classLoader.getParent()!=null){
+                classLoader = classLoader.getParent();
+                Log.i(TAG,"[onCreate] classLoader " + " : " + classLoader.toString());
+            }
+        }
     }
 
     @Override
