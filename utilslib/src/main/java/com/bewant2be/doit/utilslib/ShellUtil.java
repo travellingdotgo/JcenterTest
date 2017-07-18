@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -21,6 +22,30 @@ import java.util.ListIterator;
 
 public class ShellUtil {
     private final static String TAG = "ShellUtil";
+
+    public static void sh(String cmd){
+        Process p = null;
+        DataOutputStream os = null;
+        try {
+            p = Runtime.getRuntime().exec("sh");
+            os = new DataOutputStream(p.getOutputStream());
+            os.writeBytes(cmd + "\n");
+            os.writeBytes("exit\n");
+            os.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.e(TAG, "cmd failure: " + cmd + " " +e.getMessage());
+        } finally {
+            if(p != null)  { p.destroy(); }
+            if(os != null){
+                try {
+                    os.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 
     public static List<String> execute(String cmd){   // this function blocks sometimes
         String error_str = "";
