@@ -159,6 +159,25 @@ public class ShellUtil {
         }
     }
 
+
+
+    public static boolean executeAsBySh(String cmd) {
+        try {
+            Process p = Runtime.getRuntime().exec("sh");
+            OutputStream out = p.getOutputStream();
+            out.write((cmd + "\n").getBytes());
+            out.flush();
+            out.close();
+            if (p.waitFor() == 0) {
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            Log.e("TAG", "Exception:  " + e.toString());
+            return false;
+        }
+    }
+
     public static boolean isRooted() {
         String binPath = "/system/bin/su";
         String xBinPath = "/system/xbin/su";
