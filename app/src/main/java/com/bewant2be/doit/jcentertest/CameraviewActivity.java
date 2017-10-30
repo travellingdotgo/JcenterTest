@@ -1,14 +1,22 @@
 package com.bewant2be.doit.jcentertest;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.ImageFormat;
+import android.graphics.Rect;
+import android.graphics.YuvImage;
 import android.hardware.Camera;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.bewant2be.doit.utilslib.*;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -41,6 +49,7 @@ public class CameraviewActivity extends AppCompatActivity {
             // add data process here
 
 
+
             // don't delete the code below
             camera.addCallbackBuffer(data);
         }
@@ -59,7 +68,22 @@ public class CameraviewActivity extends AppCompatActivity {
             }
 
             // add data process here
+            Camera.Size previewSize = camera.getParameters().getPreviewSize();
+            YuvImage yuvimage=new YuvImage(data, ImageFormat.NV21, previewSize.width, previewSize.height, null);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            yuvimage.compressToJpeg(new Rect(0, 0, previewSize.width, previewSize.height), 100, baos);
+            byte[] bytes = baos.toByteArray();
+            //yuvimage.getYuvData();
 
+            final Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            Log.i(TAG, "bitmap: " + bitmap);
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    imgView.setImageBitmap(bitmap);
+                }
+            });
 
             // don't delete the code below
             camera.addCallbackBuffer(data);
@@ -67,6 +91,7 @@ public class CameraviewActivity extends AppCompatActivity {
     };
 
 
+    ImageView imgView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +99,8 @@ public class CameraviewActivity extends AppCompatActivity {
 
         mContext = getApplicationContext();
         display_degree = DisplayUtil.getRotation(this);
+
+        imgView = (ImageView)findViewById(R.id.imgCallback);
 
         cameraView1 = (CameraView)findViewById(R.id.cameraView1);
         cameraView1.init(CameraUtil.getFrontCameraId(), display_degree, previewCallback1, 3);
@@ -86,9 +113,9 @@ public class CameraviewActivity extends AppCompatActivity {
 
         LinearLayout linearLayout = (LinearLayout)findViewById(R.id.ll_surfaces);
         if(display_degree % 180==0){
-            linearLayout.setOrientation(LinearLayout.VERTICAL);
+            linearLayout.setOrientation(LinearLayout.HORIZONTAL );
         }else{
-            linearLayout.setOrientation(LinearLayout.HORIZONTAL);
+            linearLayout.setOrientation(LinearLayout.VERTICAL );
         }
 
         final int seconds = 3;

@@ -48,7 +48,9 @@
             android:name="com.bewant2be.doit.utilslib.service.NetworkMonitorIntentService"
             android:exported="false" />
 
-        <activity android:name=".CameraviewActivity" />
+        <activity android:name=".CameraviewActivity"
+            android:screenOrientation="landscape"
+            />
         <activity android:name=".PrivilegedActivity" />
         <activity android:name=".WebentranceActivity">
             <intent-filter>

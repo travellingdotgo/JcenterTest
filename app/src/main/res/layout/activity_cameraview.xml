@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:bewant2be="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
@@ -13,10 +14,10 @@
         android:layout_height="match_parent" >
         <com.bewant2be.doit.utilslib.CameraView
             android:id="@+id/cameraView1"
-            bewant2be:previewwidth="1920"
-            bewant2be:previewheight="1080"
-            bewant2be:displaywidth="480"
-            bewant2be:displayheight="270"
+            bewant2be:previewwidth="800"
+            bewant2be:previewheight="600"
+            bewant2be:displaywidth="300"
+            bewant2be:displayheight="400"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -28,13 +29,21 @@
         <!--  -->
         <com.bewant2be.doit.utilslib.CameraView
             android:id="@+id/cameraView2"
-            bewant2be:previewwidth="1920"
-            bewant2be:previewheight="1080"
-            bewant2be:displaywidth="480"
-            bewant2be:displayheight="270"
+            bewant2be:previewwidth="800"
+            bewant2be:previewheight="600"
+            bewant2be:displaywidth="300"
+            bewant2be:displayheight="400"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
+
+        <ImageView
+            android:id="@+id/imgCallback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
     </LinearLayout>
 
-</RelativeLayout>
+
+</LinearLayout>
