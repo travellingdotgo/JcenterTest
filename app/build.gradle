@@ -57,6 +57,8 @@ dependencies {
     compile 'com.jakewharton.rxbinding:rxbinding-support-v4:0.4.0'
     // for test end
 
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+
     // webRtc
     compile 'io.pristine:libjingle:11139@aar'
 
@@ -64,4 +66,5 @@ dependencies {
     debugCompile project(path: ':utilslib', configuration: 'debug')
 
     //compile project(':utilslib')
+    compile project(':uilib')
 }
