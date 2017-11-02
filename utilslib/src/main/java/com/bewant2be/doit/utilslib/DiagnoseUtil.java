@@ -10,7 +10,6 @@ import android.widget.Toast;
 /**
  * Created by user on 3/29/17.
  */
-@NotProguard
 public class DiagnoseUtil {
     private final static String TAG = "DiagnoseUtil";
 
@@ -19,7 +18,6 @@ public class DiagnoseUtil {
 
     final private int[] value = {0};
 
-    @NotProguard
     public interface Callback{
         public void onResult( boolean bMainThreadOK );
     }
