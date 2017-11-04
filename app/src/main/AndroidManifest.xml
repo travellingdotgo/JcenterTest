@@ -89,7 +89,8 @@
         <activity android:name=".waterflow.WaterflowActivity" />
         <activity android:name=".CardviewActivity" />
         <activity android:name=".MiscActivity" />
-        <activity android:name=".sqlite.SqliteActivity"></activity>
+        <activity android:name=".sqlite.SqliteActivity" />
+        <activity android:name=".ShapeActivity"></activity>
     </application>
 
 </manifest>
