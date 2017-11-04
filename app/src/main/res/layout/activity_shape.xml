@@ -10,6 +10,7 @@
     android:background="@color/colorPrimary" >
 
     <TextView
+        android:id="@+id/tvFont"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:text="textview"
