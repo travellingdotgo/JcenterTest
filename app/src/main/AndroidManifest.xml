@@ -90,7 +90,8 @@
         <activity android:name=".CardviewActivity" />
         <activity android:name=".MiscActivity" />
         <activity android:name=".sqlite.SqliteActivity" />
-        <activity android:name=".ShapeActivity"></activity>
+        <activity android:name=".ShapeActivity" />
+        <activity android:name=".LoginActivity"></activity>
     </application>
 
 </manifest>
