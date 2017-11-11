@@ -13,6 +13,10 @@ android {
         versionName gitVersionTag()
     }
 
+    lintOptions {
+        abortOnError false
+    }
+
     publishNonDefault true
 
     buildTypes {
