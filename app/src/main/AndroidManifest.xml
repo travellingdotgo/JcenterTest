@@ -92,7 +92,8 @@
         <activity android:name=".sqlite.SqliteActivity" />
         <activity android:name=".ShapeActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".VerifyCodeViewTestActivity"></activity>
+        <activity android:name=".VerifyCodeViewTestActivity" />
+        <activity android:name=".RetrofitActivity"></activity>
     </application>
 
 </manifest>

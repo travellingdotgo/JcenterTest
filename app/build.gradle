@@ -24,6 +24,11 @@ android {
         }
     }
 
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+        //exclude 'META-INF/services/javax.annotation.processing.Processor' // butterknife
+    }
 
     lintOptions {
         abortOnError false
@@ -61,6 +66,13 @@ dependencies {
 
     // webRtc
     compile 'io.pristine:libjingle:11139@aar'
+
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+
+    provided "org.projectlombok:lombok:1.16.10"
+    //annotationProcessor "org.projectlombok:lombok:1.16.10"
 
     releaseCompile project(path: ':utilslib', configuration: 'release')
     debugCompile project(path: ':utilslib', configuration: 'debug')

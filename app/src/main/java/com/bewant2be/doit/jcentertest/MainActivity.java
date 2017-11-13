@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity{
         }
 
 
-        startNetCheck();
+        //startNetCheck();
 
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
     }
