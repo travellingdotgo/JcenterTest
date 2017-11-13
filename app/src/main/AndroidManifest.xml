@@ -93,7 +93,8 @@
         <activity android:name=".ShapeActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".VerifyCodeViewTestActivity" />
-        <activity android:name=".RetrofitActivity"></activity>
+        <activity android:name=".RetrofitActivity" />
+        <activity android:name=".GlideActivity"></activity>
     </application>
 
 </manifest>
