@@ -68,12 +68,12 @@ public class RetrofitActivity extends AppCompatActivity {
 
         try{
             if(syncPost){
-                Call<SmsResponse> call = service.getBook(phoneNo);
+                Call<SmsResponse> call = service.getSms(phoneNo);
                 SmsResponse response = call.execute().body();
 
                 Log.i(TAG, "response: " + response.toString() );
             }else {
-                Call<SmsResponse> call = service.getBook(phoneNo);
+                Call<SmsResponse> call = service.getSms(phoneNo);
                 call.enqueue(new Callback<SmsResponse>() {
                     @Override
                     public void onResponse(Call<SmsResponse> call, Response<SmsResponse> response) {

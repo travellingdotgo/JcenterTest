@@ -94,7 +94,12 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".VerifyCodeViewTestActivity" />
         <activity android:name=".RetrofitActivity" />
-        <activity android:name=".GlideActivity"></activity>
+        <activity android:name=".GlideActivity" />
+        <activity
+            android:name=".LianhuaActivity"
+            android:screenOrientation="landscape"></activity>
+        <activity android:name=".RegisterActivity"
+            android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>

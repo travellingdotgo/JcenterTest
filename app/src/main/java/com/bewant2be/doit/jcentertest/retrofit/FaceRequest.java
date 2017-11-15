@@ -60,14 +60,3 @@ public class FaceRequest {
         this.file = file;
     }
 }
-
-
-/*
-        <tr><td>姓名</td><td><input type="text" value="hello" name="name"></td></tr>
-        <tr><td>性别</td><td><input type="text" value="F" name="sex"></td></tr>
-        <tr><td>手机号</td><td><input type="text" value="139" name="mobile"></td></tr>
-        <tr><td>身份证号</td><td><input type="text" value="330" name="idno"></td></tr>
-        <tr><td>地址</td><td><input type="text" value="浙江省" name="address"></td></tr>
-        <tr><td>头像</td><td><input name="photo" type="file"></td></tr>
-        <tr><td></td><td><input type="submit" value="submit"></td></tr>
-*/

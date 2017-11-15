@@ -23,13 +23,8 @@ import retrofit2.http.Query;
 public interface SmsService {
 
     @GET("oto/cgi/eop/sms/{phone}")
-    Call<SmsResponse> getBook(@Path("phone") String phone);
+    Call<SmsResponse> getSms(@Path("phone") String phone);
 
-    /*
-    @Multipart
-    @POST("oto/cgi/eop/facecheck")
-    Call<FaceResponse> upload(@Body FaceRequest faceRequest, @Part("description") RequestBody description, @Part MultipartBody.Part file);
-    */
 
     @Multipart
     @POST("oto/cgi/eop/facecheck")
