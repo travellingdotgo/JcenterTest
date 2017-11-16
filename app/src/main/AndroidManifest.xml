@@ -95,7 +95,8 @@
         <activity android:name=".VerifyCodeViewTestActivity" />
         <activity android:name=".RetrofitActivity" />
         <activity android:name=".GlideActivity" />
-        <activity android:name=".TouchDelegateActivity"></activity>
+        <activity android:name=".TouchDelegateActivity" />
+        <activity android:name=".EnhancedtoastActivity"></activity>
     </application>
 
 </manifest>
