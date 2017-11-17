@@ -4,7 +4,14 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
-
+    <!-- for WaterflowActivity -->
     <color name="action_press" >#aaff0000</color>
     <color name="action_normal">#44ff0000</color>
+
+    <!-- for   TasksCompletedActivity   progressbar -->
+    <color name="white">#ffffff</color>
+    <color name="header_bg_common">#323a45</color>
+    <color name="title_txt_color">#f1f1f3</color>
+    <color name="circle_color">#323a45</color>
+    <color name="ring_color">#14b9d6</color>
 </resources>

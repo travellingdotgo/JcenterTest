@@ -96,7 +96,8 @@
         <activity android:name=".RetrofitActivity" />
         <activity android:name=".GlideActivity" />
         <activity android:name=".TouchDelegateActivity" />
-        <activity android:name=".EnhancedtoastActivity"></activity>
+        <activity android:name=".EnhancedtoastActivity" />
+        <activity android:name=".TasksCompletedActivity" />
     </application>
 
 </manifest>
