@@ -99,6 +99,7 @@
         <activity android:name=".EnhancedtoastActivity" />
         <activity android:name=".TasksCompletedActivity" />
         <activity android:name=".CustomDialogActivity" />
+        <activity android:name=".RtspActivity" />
     </application>
 
 </manifest>
