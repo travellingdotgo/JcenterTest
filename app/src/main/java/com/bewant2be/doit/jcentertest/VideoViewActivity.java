@@ -10,8 +10,8 @@ import android.widget.VideoView;
 public class VideoViewActivity extends AppCompatActivity implements MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener, MediaPlayer.OnCompletionListener {
 
     private VideoView videoView1;
-    private String PATH_URL =   "http://baobab.wdjcdn.com/145076769089714.mp4";
-                                //"http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4";
+    private String PATH_URL =  "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4";
+                                // this .264 also supported, by lucent. "rtsp://192.168.1.3:8554/1.264";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
