@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_drawables"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <Button
+        android:id="@+id/btnA"
+        android:textAllCaps="false"
+        android:background="@drawable/shape_btn"
+        android:text="btnA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnB"
+        android:text="btnB"
+        android:textAllCaps="false"
+        android:background="@drawable/shape_et_bottom_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnC"
+        android:text="btnC"
+        android:textAllCaps="false"
+        android:background="@drawable/shape_toastcontainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnD"
+        android:text="btnD"
+        android:textAllCaps="false"
+        android:background="@drawable/shape_btn_unsel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
