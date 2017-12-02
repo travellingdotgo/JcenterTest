@@ -101,6 +101,9 @@
         <activity android:name=".CustomDialogActivity" />
         <activity android:name=".RtspActivity" />
         <activity android:name=".DrawablesActivity" />
+        <activity
+            android:name=".RtspMediaplayerActivity"
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>
