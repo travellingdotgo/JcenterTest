@@ -43,7 +43,7 @@ public class BootReceiver extends BroadcastReceiver {
             @Override
             public void run() {
                 String s = NetUtil.getCurrentNetWorkState(context) + ": " + NetUtil.getLocalIPAddress();
-                DebugTool.makeFloatTextview(context, s);
+                //DebugTool.makeFloatTextview(context, s);
             }
         };
         timer.schedule(timerTask, 15*1000);
