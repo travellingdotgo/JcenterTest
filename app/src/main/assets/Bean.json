@@ -1,0 +1,35 @@
+{
+  "MiddleSchools":
+  [
+    {
+      "SchoolName": "吉大附中",
+      "ID": "sch_001",
+      "Departments":
+      [
+        {
+          "DepartmentName": "财务部",
+          "DepartmentId":"bm_001"
+        },
+        {
+          "DepartmentName": "事业部",
+          "DepartmentId":"bm_002"
+        }
+      ]
+    },
+    {
+      "SchoolName":"师大附中",
+      "ID": "sch_002",
+      "Departments":
+      [
+        {
+          "DepartmentName": "财务部",
+          "DepartmentId":"bm_001"
+        },
+        {
+          "DepartmentName": "人力资源部",
+          "DepartmentId":"bm_003"
+        }
+      ]
+    }
+  ]
+}

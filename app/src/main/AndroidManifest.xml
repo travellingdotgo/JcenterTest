@@ -104,8 +104,10 @@
         <activity
             android:name=".RtspMediaplayerActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".MediaCodecActivity"
+        <activity
+            android:name=".MediaCodecActivity"
             android:screenOrientation="landscape" />
+        <activity android:name=".GsonActivity" />
     </application>
 
 </manifest>
