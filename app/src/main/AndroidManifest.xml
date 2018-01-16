@@ -108,7 +108,8 @@
             android:name=".MediaCodecActivity"
             android:screenOrientation="landscape" />
         <activity android:name=".GsonActivity" />
-        <activity android:name=".SimpleGLActivity"></activity>
+        <activity android:name=".SimpleGLActivity" />
+        <activity android:name=".SoundActivity" />
     </application>
 
 </manifest>
