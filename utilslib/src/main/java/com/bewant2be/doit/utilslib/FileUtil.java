@@ -1,8 +1,10 @@
 package com.bewant2be.doit.utilslib;
 
 import android.content.Context;
+import android.os.Environment;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -35,6 +37,17 @@ public class FileUtil {
 
         }
         return byteArrayOutputStream.toByteArray();
+    }
+
+    public static void touchFolder(String folderpath){
+        /*
+        final String FRAME_DUMP_FOLDER_PATH = Environment.getExternalStorageDirectory()
+                                                + File.separator + "haha";
+        */
+        File dumpFolder = new File(folderpath);
+        if (!dumpFolder.exists()) {
+            dumpFolder.mkdirs();
+        }
     }
 
 }
