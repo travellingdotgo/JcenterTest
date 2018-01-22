@@ -15,9 +15,7 @@ import java.net.UnknownHostException;
 import java.util.Enumeration;
 import java.util.Iterator;
 
-/**
- * Created by user on 3/28/17.
- */
+
 public class NetUtil {
 
     public final static String TAG = "NetUtil";
