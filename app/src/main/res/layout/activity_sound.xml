@@ -20,4 +20,14 @@
         android:layout_marginStart="86dp"
         android:layout_marginTop="111dp"
         android:id="@+id/btnPlaySoundPool" />
+
+    <Button
+        android:text="btnRingtone"
+        android:textAllCaps="false"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnPlaySoundPool"
+        android:layout_alignStart="@+id/btnPlaySoundPool"
+        android:layout_marginTop="26dp"
+        android:id="@+id/btnRingtone" />
 </RelativeLayout>

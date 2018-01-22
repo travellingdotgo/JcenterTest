@@ -2,8 +2,11 @@ package com.bewant2be.doit.jcentertest;
 
 import android.content.Context;
 import android.media.AudioManager;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
 import android.media.SoundPool;
 
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -29,7 +32,16 @@ public class SoundActivity extends AppCompatActivity {
         findViewById(R.id.btnPlaySoundPool).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBtnClick();
+                playSoundPool();
+            }
+        });
+
+        findViewById(R.id.btnRingtone).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
+                r.play();
             }
         });
     }
@@ -40,7 +52,8 @@ public class SoundActivity extends AppCompatActivity {
         soundPool.release();
     }
 
-    private void onBtnClick(){
+    private void playSoundPool(){
+
         /*
         int play(int soundID, float leftVolume, float rightVolume, int priority, int loop, float rate[0.5-2.0]
         */
@@ -52,8 +65,10 @@ public class SoundActivity extends AppCompatActivity {
     private void init(){
         // volume, type, quality
         soundPool=new SoundPool(2, AudioManager.STREAM_MUSIC, 0);
-        map.put("soundtrack1", soundPool.load(this, R.raw.bell, 1));
-        map.put("soundtrack2", soundPool.load(this, R.raw.chat_request, 1));
+
+        int PRIORITY_1 = 1;
+        map.put("soundtrack1", soundPool.load( getApplicationContext(), R.raw.bell, PRIORITY_1));
+        map.put("soundtrack2", soundPool.load( getApplicationContext(), R.raw.chat_request, PRIORITY_1));
     }
 
 
