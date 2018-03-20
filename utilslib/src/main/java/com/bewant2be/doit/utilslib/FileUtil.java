@@ -50,4 +50,9 @@ public class FileUtil {
         }
     }
 
+
+    public static String[] getAssetsPath(Context context,String path) throws IOException {
+        String fileNames[] = context.getAssets().list(path);
+        return fileNames;
+    }
 }
