@@ -76,6 +76,14 @@ public class CameraView extends SurfaceView {
         mPriority=priority;
     }
 
+    private boolean enableFaceDetec = true;
+
+    public boolean enableFaceDetection( boolean enable ){
+        enableFaceDetec = enable;
+
+        return true;
+    }
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         String s = "onMeasure. mDisplayDegree:  " + mDisplayDegree + "  ";
@@ -142,18 +150,18 @@ public class CameraView extends SurfaceView {
     }
 
 
-    private void openCamera(int wichCamera, int preview_width,int preview_height, Camera.PreviewCallback _previewCallback )  throws Exception {
+    private void openCamera(int whichCamera, int preview_width,int preview_height, Camera.PreviewCallback _previewCallback )  throws Exception {
         Log.i(TAG, "openCamera ");
         mPreviewWidth=preview_width;
         mPreviewHeight=preview_height;
         previewCallback = _previewCallback;
 
-        if (wichCamera>FRONT_CAMERA || wichCamera<BACK_CAMERA){
+        if (whichCamera>FRONT_CAMERA || whichCamera<BACK_CAMERA){
             Log.e(TAG, "wichCamera invalid");
             return;
         }
 
-        mCameraId = wichCamera;
+        mCameraId = whichCamera;
         Log.i(TAG, "openCamera cameraId=" + mCameraId);
 
         camera = Camera.open(mCameraId);
@@ -238,6 +246,22 @@ public class CameraView extends SurfaceView {
         return true;
     }
 
+
+    Camera.FaceDetectionListener mFaceDetectionListener = new Camera.FaceDetectionListener(){
+
+        @Override
+        public void onFaceDetection(Camera.Face[] faces, Camera camera) {
+
+            if (faces.length < 1) {
+                Log.i(TAG, "no face detected ");
+                //return;
+            }else {
+                Log.i(TAG, "face detected");
+            }
+
+        }
+    };
+
     SurfaceHolder.Callback surfaceHolderCallback = new SurfaceHolder.Callback(){
         @Override
         public void surfaceCreated(SurfaceHolder holder) {
@@ -280,6 +304,20 @@ public class CameraView extends SurfaceView {
                 }
 
                 camera.startPreview();
+
+                if(enableFaceDetec){
+                    int maxNumDetectedFaces = camera.getParameters().getMaxNumDetectedFaces();
+                    if (maxNumDetectedFaces > 0) {
+                        Log.i(TAG, "face detectection supported");
+                        camera.setFaceDetectionListener(mFaceDetectionListener);
+                        camera.startFaceDetection();
+                    }else{
+                        Log.e(TAG, "face detectection not supported");
+                    }
+                } else {
+
+                }
+
                 camera.setPreviewDisplay(holder);
 
                 mCameraDisplayOrientation = CameraUtil.getSuitableCameraDisplayOrientation(mDisplayDegree,mCameraId);
