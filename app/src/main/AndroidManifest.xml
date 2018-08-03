@@ -110,6 +110,7 @@
         <activity android:name=".GsonActivity" />
         <activity android:name=".SimpleGLActivity" />
         <activity android:name=".SoundActivity" />
+        <activity android:name=".NetutilActivity"></activity>
     </application>
 
 </manifest>

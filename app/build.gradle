@@ -82,4 +82,5 @@ dependencies {
 
     //compile project(':utilslib')
     compile project(':uilib')
+    compile project(':netlib')
 }
