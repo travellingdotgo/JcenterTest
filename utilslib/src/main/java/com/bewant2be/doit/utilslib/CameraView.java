@@ -10,7 +10,6 @@ import android.hardware.Camera;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
-import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -76,7 +75,7 @@ public class CameraView extends SurfaceView {
         mPriority=priority;
     }
 
-    private boolean enableFaceDetec = true;
+    private boolean enableFaceDetec = false;
 
     public boolean enableFaceDetection( boolean enable ){
         enableFaceDetec = enable;

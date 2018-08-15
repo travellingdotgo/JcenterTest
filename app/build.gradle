@@ -77,6 +77,8 @@ dependencies {
     provided "org.projectlombok:lombok:1.16.10"
     //annotationProcessor "org.projectlombok:lombok:1.16.10"
 
+    compile 'pub.devrel:easypermissions:0.1.5'
+
     releaseCompile project(path: ':utilslib', configuration: 'release')
     debugCompile project(path: ':utilslib', configuration: 'debug')
 
